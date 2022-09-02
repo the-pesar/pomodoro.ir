@@ -1,7 +1,7 @@
 {
-  "name": "test",
-  "version": "0.1.0",
-  "private": true,
+  "name": "pomodoro",
+  "version": "0.0.0",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

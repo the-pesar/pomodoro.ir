@@ -7,25 +7,27 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/styles/variables.scss";
 .container {
   --width: 10%;
 }
 .container > h1 {
   font-size: 18px;
+  color: $secondary-color;
 }
 .container > .loading {
   display: flex;
   align-items: center;
   height: 30px;
   width: 600px;
-  border: 2px solid black;
+  border: 2px solid $secondary-color;
 }
 .container > .loading > .progress {
   height: 95%;
   margin: 0 1px;
   width: 9%;
-  background-color: rgb(217, 85, 80);
+  background-color: $secondary-color;
   animation: progressing 2s infinite;
 }
 @media screen and (max-width: 670px) {
