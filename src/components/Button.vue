@@ -17,12 +17,13 @@
     outline: none;
     border: none;
     padding: 15px 60px;
-    font-size: 19px;
+    font-size: 21px;
     font-family: "Poppins", sans-serif;
     border-radius: 5px;
     cursor: pointer;
     color: $primary-color;
     background-color: $secondary-color;
+    text-transform: uppercase;
     &:active {
       transform: scale(.95);
     }
