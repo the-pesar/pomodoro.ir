@@ -1,5 +1,5 @@
 # Pomodoro.ir
-
+The Pomodoro technique is a method of time management that was developed by Francesco Cirillo in the 1980s
 ## Project setup
 ```
 yarn install
