@@ -1,40 +1,43 @@
 <template>
   <div class="wrapper">
-    <div v-for="tab in tabs" :key="tab.name" :class="['tab', tab.name === modelValue.name && 'active']"
-      @click="clickAction(tab)">
+    <div
+      v-for="tab in tabs"
+      :key="tab.name"
+      :class="['tab', tab.name === modelValue.name && 'active']"
+      @click="clickAction(tab)"
+    >
       <span v-text="tab.text"></span>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits } from "vue"
+import { StatusType } from "@/composable/status"
 
 export interface TabI {
-  name: string;
-  text: string;
+  name: StatusType
+  text: string
+  time: number
 }
 
 defineProps<{
-  tabs: TabI[];
-  modelValue: TabI;
-}>();
+  tabs: TabI[]
+  modelValue: TabI
+}>()
 
 const emit = defineEmits<{
-  (e: "update:modelValue", tab: TabI): void;
+  (e: "update:modelValue", tab: TabI): void
   (e: "change", tab: TabI): void
-}>();
+}>()
 
 const clickAction = (tab: TabI) => {
-  emit('update:modelValue', tab)
-  emit('change', tab)
-
+  emit("update:modelValue", tab)
+  emit("change", tab)
 }
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/styles/variables.scss";
-
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -46,14 +49,14 @@ const clickAction = (tab: TabI) => {
     cursor: pointer;
 
     span {
-      color: $secondary-color;
+      color: #fff;
       text-transform: uppercase;
     }
   }
 
   .active {
-    background-color: $glass-bg;
-    border-bottom: 2px solid $secondary-color;
+    background-color: var(--bg-glass);
+    border-bottom: 2px solid #fff;
   }
 }
 </style>

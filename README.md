@@ -1,4 +1,4 @@
-# test
+# Pomodoro.ir
 
 ## Project setup
 ```

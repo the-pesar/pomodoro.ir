@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
+
+:root {
+  --bg-glass: rgba(255, 255, 255, 0.15);
+}
+
+body[status="focus"] {
+  --bg-color: #d95550;
+}
+
+body[status="short-break"] {
+  --bg-color: #4c9195;
+}
+
+body[status="long-break"] {
+  --bg-color: #457ca3;
+}
+
+@font-face {
+  font-family: "clockicons";
+  src: url("@/assets/fonts/clockicons.ttf");
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#app {
+  font-family: "Poppins", sans-serif, system-ui;
+  height: 100vh;
+  background-color: var(--bg-color);
+  transition: background-color 0.75s;
+}

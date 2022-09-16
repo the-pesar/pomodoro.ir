@@ -1,7 +1,6 @@
 {
-  "name": "pomodoro",
-  "version": "0.0.0",
-  "private": false,
+  "name": "pomodoro.ir",
+  "version": "0.0.1",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -10,13 +9,11 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "pinia": "^2.0.17",
     "register-service-worker": "^1.7.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
@@ -33,10 +30,10 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "jest": "^27.0.5",
+    "ts-jest": "^27.0.4",
+    "@types/jest": "^27.0.1",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
-    "ts-jest": "^27.0.4",
-    "typescript": "~4.5.5",
-    "vue-cli-plugin-pinia": "~0.1.4"
+    "typescript": "~4.5.5"
   }
 }

@@ -1,94 +1,101 @@
 <template>
   <main>
     <div class="container">
-      <div class="task-wrapper">
-        <span class="task" v-text="task"></span>
-      </div>
+      <Task :time="time" :maxTime="currentTab.time">{{ task }}</Task>
       <div class="timer-wrapper">
         <Tab v-model="currentTab" :tabs="tabs" @change="tabChange" />
         <div class="timer" v-text="timer"></div>
-        <Button>start</Button>
+        <Button v-if="timeInterval" @click="stopTimer">stop</Button>
+        <Button v-else @click="startTimer">start</Button>
       </div>
     </div>
   </main>
 </template>
 
 <script lang="ts" setup>
-import { Component, computed, defineAsyncComponent, ref } from "vue";
-import { useRoute } from "vue-router";
-import { TabI } from "@/components/Tab.vue";
+import { Component, computed, defineAsyncComponent, ref } from "vue"
+import { useRoute } from "vue-router"
+import { TabI } from "@/components/Tab.vue"
+import { useStatus } from "@/composable/status"
 
-const Routes = useRoute();
+const Route = useRoute()
+const { setDefaultStatus, setStatus } = useStatus()
 
-const Tab: Component = defineAsyncComponent(
-  () => import("@/components/Tab.vue")
-);
-
-const Button: Component = defineAsyncComponent(
-  () => import("@/components/Button.vue")
-);
+setDefaultStatus()
 
 const tabs: TabI[] = [
   {
     name: "focus",
     text: "Focus",
+    time: 1500,
   },
   {
     name: "short-break",
     text: "Short Break",
+    time: 300,
   },
   {
     name: "long-break",
     text: "Long Break",
+    time: 900,
   },
-];
-
-const currentTab = ref<TabI>(tabs[0]);
+]
+// must be change (hardcode)
+const currentTab = ref<TabI>(tabs[0])
 
 const task = ref<string>(
-  Routes.query.task?.toString() || "work on the pomodoro project"
-);
-const time = ref<number>(1500); // 25:00 => 1500 | 05:00 => 300 | 15:00 => 900
+  Route.query.task?.toString() || "work on the pomodoro project"
+)
+// must be change (hardcode)
+const time = ref<number>(1500) // 25:00 => 1500 | 05:00 => 300 | 15:00 => 900
 
-const timer = computed(() => {
-  if (time.value === 0) return "00:00";
+let timeInterval = ref<number>()
 
-  let m: number | string = Math.trunc(time.value / 60);
-  let s: number | string = time.value % 60;
+const timer = computed<string>(() => {
+  if (time.value === 0) return "00:00"
 
-  if (m < 10) m = `0${m}`;
-  if (s < 10) s = `0${s}`;
+  let m: number | string = Math.trunc(time.value / 60)
+  let s: number | string = time.value % 60
 
-  return `${m}:${s}`;
-});
+  if (m < 10) m = `0${m}`
+  if (s < 10) s = `0${s}`
+
+  return `${m}:${s}`
+})
 
 const tabChange = (newTab: TabI) => {
-  console.log(newTab);
-  switch (newTab.name) {
-    case 'focus':
-      time.value = 1500; 
-      break;
-    case 'short-break': 
-      time.value = 300; 
-      break;
-    case 'long-break': 
-      time.value = 900;
-      break;
-    default:
+  clearInterval(timeInterval.value)
+  timeInterval.value = 0
+  time.value = newTab.time
+  setStatus(newTab.name)
+}
 
-      break;
-  }
-};
+const startTimer = () => {
+  timeInterval.value = setInterval(() => {
+    if (time.value === 0) return clearInterval(timeInterval.value)
+    time.value--
+  }, 1 * 1000)
+}
 
-const timeInterval: number = setInterval(() => {
-  if (time.value === 0) return clearInterval(timeInterval);
-  time.value--;
-}, 1000);
+const stopTimer = () => {
+  clearInterval(timeInterval.value)
+  timeInterval.value = 0
+}
+
+const Tab: Component = defineAsyncComponent(
+  () => import("@/components/Tab.vue")
+)
+
+const Button: Component = defineAsyncComponent(
+  () => import("@/components/Button.vue")
+)
+
+const Task: Component = defineAsyncComponent(
+  () => import("@/components/Task.vue")
+)
 </script>
 
-<style lang="scss" scoped>
-@import "@/assets/styles/variables.scss";
-
+<style lang="scss">
 main {
   display: flex;
   align-items: center;
@@ -97,31 +104,16 @@ main {
   padding-top: 50px;
 
   .container {
-    .task-wrapper {
-      background-color: $glass-bg;
-      text-align: center;
-      padding: 10px 0px;
-      border-radius: 5px;
-      /* border: 2.5px dashed $glass-bg; */
-
-      .task {
-        color: $secondary-color;
-        // font-weight: 600;
-        text-transform: capitalize;
-        font-size: 20px;
-      }
-    }
-
     .timer-wrapper {
       margin-top: 30px;
       border-radius: 5px;
-      background-color: $glass-bg;
+      background-color: var(--bg-glass);
 
       .timer {
         padding: 40px 80px;
         font-family: "clockicons";
         font-size: 128px;
-        color: $secondary-color;
+        color: #fff;
       }
     }
   }
