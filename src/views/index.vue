@@ -125,6 +125,10 @@ main {
   flex-direction: column;
   padding-top: 50px;
   .container {
+    width: 500px;
+    @media screen and (max-width: 640px) {
+      width: 380px;
+    }
     .timer-wrapper {
       margin-top: 30px;
       border-radius: 5px;
@@ -154,10 +158,11 @@ main {
       }
 
       .timer {
-        padding: 40px 80px;
+        padding: 50px 0px;
         font-family: "clockicons";
         font-size: 128px;
         color: #fff;
+        text-align: center;
       }
     }
   }

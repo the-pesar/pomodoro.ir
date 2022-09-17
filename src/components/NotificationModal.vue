@@ -51,6 +51,9 @@ const sendRequest = () => {
     padding: 20px;
     background-color: #fff;
     border-radius: 15px;
+    @media screen and (max-width: 640px) {
+      width: 350px;
+    }
     p,
     h3 {
       color: #231f20;
