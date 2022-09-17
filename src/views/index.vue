@@ -52,7 +52,7 @@ const task = ref<string>(
   Route.query.task?.toString() || "work on the pomodoro project"
 )
 
-const alertSong: HTMLAudioElement = new Audio("/songs/alarm-bell.mp3")
+const alertSound: HTMLAudioElement = new Audio("/sounds/alarm-bell.mp3")
 
 const time = ref<number>(currentTab.value.time) // 25:00 => 1500 | 05:00 => 300 | 15:00 => 900
 
@@ -90,7 +90,7 @@ const startTimer = () => {
     if (time.value === 0) {
       clearInterval(timeInterval.value)
       timeInterval.value = 0
-      alertSong.play()
+      alertSound.play()
       new Notification("Time is over !!!", {
         body: "Go to the next step",
         timestamp: 3000,
