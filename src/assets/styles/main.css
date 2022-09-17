@@ -5,15 +5,15 @@
 }
 
 body[status="focus"] {
-  --bg-color: #d95550;
+  --status-color: #d95550;
 }
 
 body[status="short-break"] {
-  --bg-color: #4c9195;
+  --status-color: #4c9195;
 }
 
 body[status="long-break"] {
-  --bg-color: #457ca3;
+  --status-color: #457ca3;
 }
 
 @font-face {
@@ -26,10 +26,9 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
-
 #app {
-  font-family: "Poppins", sans-serif, system-ui;
   height: 100vh;
-  background-color: var(--bg-color);
+  font-family: "Poppins", sans-serif, system-ui;
+  background-color: var(--status-color);
   transition: background-color 0.75s;
 }
