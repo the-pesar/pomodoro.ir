@@ -26,9 +26,13 @@ const emit = defineEmits<{
 }>()
 
 const sendRequest = () => {
-  Notification.requestPermission().finally(() => {
-    emit("update:modelValue", false)
-  })
+  Notification.requestPermission()
+    .catch((error) => {
+      alert(error)
+    })
+    .finally(() => {
+      emit("update:modelValue", false)
+    })
 }
 </script>
 
