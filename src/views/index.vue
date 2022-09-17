@@ -35,7 +35,7 @@ const tabs: TabI[] = [
   {
     name: "short-break",
     text: "Short Break",
-    time: 30,
+    time: 20,
   },
   {
     name: "long-break",
@@ -51,6 +51,8 @@ const currentTab = ref<TabI>(
 const task = ref<string>(
   Route.query.task?.toString() || "work on the pomodoro project"
 )
+
+const alertSong: HTMLAudioElement = new Audio("/songs/alarm-bell.mp3")
 
 const time = ref<number>(currentTab.value.time) // 25:00 => 1500 | 05:00 => 300 | 15:00 => 900
 
@@ -88,7 +90,7 @@ const startTimer = () => {
     if (time.value === 0) {
       clearInterval(timeInterval.value)
       timeInterval.value = 0
-      new Audio("/songs/alarm-bell.mp3").play()
+      alertSong.play()
       new Notification("Time is over !!!", {
         body: "Go to the next step",
         timestamp: 3000,
