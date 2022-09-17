@@ -4,10 +4,11 @@
     <div class="container">
       <Task :time="time" :maxTime="currentTab.time">{{ task }}</Task>
       <div class="timer-wrapper">
-        <Tab v-model="currentTab" :tabs="tabs" @change="tabChange" />
+        <Tab v-model="currentTab" :tabs="tabs" />
         <div class="timer" v-text="timer"></div>
         <div class="button-wrapper">
           <button v-if="timeInterval" @click="stopTimer">stop</button>
+          <button v-else-if="time === 0" @click="nextStatus">next</button>
           <button v-else @click="startTimer">start</button>
         </div>
       </div>
@@ -16,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Component, computed, defineAsyncComponent, ref } from "vue"
+import { Component, computed, defineAsyncComponent, ref, watch } from "vue"
 import { useRoute } from "vue-router"
 import { TabI } from "@/components/Tab.vue"
 import { useStatus } from "@/composable/status"
@@ -30,17 +31,17 @@ const tabs: TabI[] = [
   {
     name: "focus",
     text: "Focus",
-    time: 1500,
+    time: 10, // 1500
   },
   {
     name: "short-break",
     text: "Short Break",
-    time: 20,
+    time: 10, // 300
   },
   {
     name: "long-break",
     text: "Long Break",
-    time: 900,
+    time: 10, // 900
   },
 ]
 
@@ -67,8 +68,6 @@ if (Notification.permission === "default") {
 let timeInterval = ref<number>()
 
 const timer = computed<string>(() => {
-  if (time.value === 0) return "00:00"
-
   let m: number | string = Math.trunc(time.value / 60)
   let s: number | string = time.value % 60
 
@@ -78,12 +77,12 @@ const timer = computed<string>(() => {
   return `${m}:${s}`
 })
 
-const tabChange = (newTab: TabI) => {
+watch(currentTab, (newTab: TabI) => {
   clearInterval(timeInterval.value)
   timeInterval.value = 0
   time.value = newTab.time
   setStatus(newTab.name)
-}
+})
 
 const startTimer = () => {
   timeInterval.value = setInterval(() => {
@@ -105,6 +104,26 @@ const startTimer = () => {
 const stopTimer = () => {
   clearInterval(timeInterval.value)
   timeInterval.value = 0
+}
+
+const nextStatus = () => {
+  switch (currentTab.value.name) {
+    case "focus":
+      setStatus("short-break")
+      currentTab.value = tabs[1]
+      break
+    case "short-break":
+      setStatus("long-break")
+      currentTab.value = tabs[2]
+      break
+    case "long-break":
+      setStatus("focus")
+      currentTab.value = tabs[0]
+      break
+
+    default:
+      throw new Error("switch case default !!!")
+  }
 }
 
 const Tab: Component = defineAsyncComponent(

@@ -4,7 +4,7 @@
       v-for="tab in tabs"
       :key="tab.name"
       :class="['tab', tab.name === modelValue.name && 'active']"
-      @click="clickAction(tab)"
+      @click="$emit('update:modelValue', tab)"
     >
       <span v-text="tab.text"></span>
     </div>
@@ -26,22 +26,15 @@ defineProps<{
   modelValue: TabI
 }>()
 
-const emit = defineEmits<{
+defineEmits<{
   (e: "update:modelValue", tab: TabI): void
-  (e: "change", tab: TabI): void
 }>()
-
-const clickAction = (tab: TabI) => {
-  emit("update:modelValue", tab)
-  emit("change", tab)
-}
 </script>
 
 <style lang="scss" scoped>
 .wrapper {
   display: flex;
   justify-content: space-between;
-
   .tab {
     width: 33%;
     text-align: center;
@@ -53,7 +46,6 @@ const clickAction = (tab: TabI) => {
       text-transform: uppercase;
     }
   }
-
   .active {
     background-color: var(--bg-glass);
     border-bottom: 2px solid #fff;
