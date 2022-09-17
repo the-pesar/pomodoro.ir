@@ -35,7 +35,7 @@ const tabs: TabI[] = [
   {
     name: "short-break",
     text: "Short Break",
-    time: 300,
+    time: 30,
   },
   {
     name: "long-break",
@@ -43,7 +43,6 @@ const tabs: TabI[] = [
     time: 900,
   },
 ]
-console.log(status.value)
 
 const currentTab = ref<TabI>(
   tabs.find((v) => v.name === status.value) || tabs[0]
@@ -52,16 +51,15 @@ const currentTab = ref<TabI>(
 const task = ref<string>(
   Route.query.task?.toString() || "work on the pomodoro project"
 )
+
 const time = ref<number>(currentTab.value.time) // 25:00 => 1500 | 05:00 => 300 | 15:00 => 900
 
 const notifModal = ref<boolean>(false)
 
-console.log(Notification.permission)
-
 if (Notification.permission === "default") {
   setTimeout(() => {
     notifModal.value = true
-  }, 2000)
+  }, 2 * 1000)
 }
 
 let timeInterval = ref<number>()
@@ -95,8 +93,11 @@ const startTimer = () => {
         body: "Go to the next step",
         timestamp: 3000,
       })
-    } else time.value--
-  }, 1 * 30)
+    } else {
+      time.value--
+      document.title = `${timer.value} - ${currentTab.value.text}`
+    }
+  }, 1 * 1000)
 }
 
 const stopTimer = () => {
