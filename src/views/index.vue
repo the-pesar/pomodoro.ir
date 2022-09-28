@@ -147,7 +147,7 @@ main {
   flex-direction: column;
   padding-top: 50px;
   .container {
-    width: 550px;
+    width: 530px;
     @media screen and (max-width: 640px) {
       width: 380px;
     }
