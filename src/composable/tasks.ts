@@ -1,7 +1,7 @@
 import { ref } from "vue"
 import { v4 as uuidv4 } from "uuid"
 
-interface TaskI {
+export interface TaskI {
   id: string
   name: string
   selected: boolean
