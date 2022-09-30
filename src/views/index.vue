@@ -2,7 +2,7 @@
   <NotificationModal v-model="notifModal" />
   <main>
     <div class="container">
-      <Task :time="time" :maxTime="currentTab.time">{{ task }}</Task>
+      <CurrentTask :time="time" :maxTime="currentTab.time"></CurrentTask>
       <div class="timer-wrapper">
         <Tab v-model="currentTab" :tabs="tabs" />
         <div class="timer" v-text="timer"></div>
@@ -12,6 +12,7 @@
           <button v-else @click="startTimer">start</button>
         </div>
       </div>
+      <Tasks></Tasks>
     </div>
   </main>
 </template>
@@ -31,17 +32,17 @@ const tabs: TabI[] = [
   {
     name: "focus",
     text: "Focus",
-    time: 10, // 1500
+    time: 1500, // 1500
   },
   {
     name: "short-break",
     text: "Short Break",
-    time: 10, // 300
+    time: 300, // 300
   },
   {
     name: "long-break",
     text: "Long Break",
-    time: 10, // 900
+    time: 900, // 900
   },
 ]
 
@@ -130,12 +131,15 @@ const Tab: Component = defineAsyncComponent(
   () => import("@/components/Tab.vue")
 )
 
-const Task: Component = defineAsyncComponent(
-  () => import("@/components/Task.vue")
+const CurrentTask: Component = defineAsyncComponent(
+  () => import("@/components/CurrentTask.vue")
 )
 
 const NotificationModal: Component = defineAsyncComponent(
   () => import("@/components/NotificationModal.vue")
+)
+const Tasks: Component = defineAsyncComponent(
+  () => import("@/components/Tasks.vue")
 )
 </script>
 
@@ -152,7 +156,7 @@ main {
       width: 380px;
     }
     .timer-wrapper {
-      margin-top: 30px;
+      margin-top: 20px;
       border-radius: 5px;
       background-color: var(--bg-glass);
       .button-wrapper {

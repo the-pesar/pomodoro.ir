@@ -1,13 +1,14 @@
 <template>
-  <div class="task-wrapper">
-    <span class="task">
-      <slot />
-    </span>
+  <div class="current-task">
+    <span> {{ task?.name || "You have not selected a task yet" }}</span>
     <div class="progress-task"></div>
   </div>
 </template>
 <script lang="ts" setup>
 import { computed, defineProps } from "vue"
+import { useTasks } from "@/composable/tasks"
+
+const { tasks } = useTasks()
 
 const props = defineProps<{
   time: number
@@ -17,16 +18,18 @@ const props = defineProps<{
 const progressWidth = computed(() => {
   return `${100 - (props.time / props.maxTime) * 100}%`
 })
+
+const task = computed(() => tasks.value.find((task) => task.selected === true))
 </script>
+
 <style lang="scss" scoped>
-.task-wrapper {
+.current-task {
   position: relative;
   background-color: var(--bg-glass);
   text-align: center;
-  padding: 10px 0px;
+  padding: 15px 0px;
   border-radius: 5px;
-
-  .task {
+  span {
     color: #fff;
     text-transform: capitalize;
     font-size: 20px;
