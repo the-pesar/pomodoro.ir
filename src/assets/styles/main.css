@@ -32,9 +32,43 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
+
 #app {
   min-height: 100vh;
   font-family: "Inter", sans-serif, system-ui;
   background-color: var(--status-color);
   transition: background-color 0.75s;
+}
+#descriptionBody {
+  font-family: ArialRounded, sans-serif;
+  padding: 2rem;
+}
+
+.html-section {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0.5rem 0;
+  color: rgb(70, 70, 70);
+}
+
+.html-section .html-section__heading {
+  font-size: 1.8rem;
+  color: rgb(104, 33, 1);
+}
+
+.html-section .html-section__text {
+  text-align: justify;
+  line-height: 1.7rem;
+}
+
+.html-section .html-section__list {
+  padding-left: 1.1rem;
+}
+
+.html-section .html-section__list li {
+  padding: .4rem 0;
+}
+
+.html-section .html-section__hashtag {
+  color: rgb(194, 50, 31)
 }
