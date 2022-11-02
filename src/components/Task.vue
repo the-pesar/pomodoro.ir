@@ -1,7 +1,7 @@
 <template>
   <div class="task">
     <span v-text="task.name"></span>
-    <div>
+    <div class="flex">
       <button @click="selectTask(task.id)">
         {{ task.selected ? "selected" : "select" }}
       </button>
@@ -10,14 +10,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { defineProps } from "vue"
-import { TaskI, useTasks } from "@/composable/tasks"
+import { defineProps } from "vue";
+import { TaskI, useTasks } from "@/composable/tasks";
 
-const { selectTask } = useTasks()
+const { selectTask } = useTasks();
 
 defineProps<{
-  task: TaskI
-}>()
+  task: TaskI;
+}>();
 </script>
 <style lang="scss" scoped>
 .task {
@@ -29,7 +29,7 @@ defineProps<{
   border-radius: 5px;
   margin-top: 20px;
   border-left: 7px solid #fff;
-  height: 50px;
+  height: 60px;
   animation: expand 0.75s;
   span {
     color: #fff;
@@ -37,32 +37,29 @@ defineProps<{
     font-size: 18px;
     outline: none;
   }
+  button {
+    background-color: rgba(255, 255, 255, 0.25);
+    border: none;
+    outline: none;
+    font-family: "Poppins", sans-serif, system-ui;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 35px;
+    width: 80px;
+    font-size: 14px;
+    text-transform: capitalize;
+    &:active {
+      transform: scale(0.95);
+    }
+  }
   div {
     display: flex;
-    button {
-      background-color: rgba(255, 255, 255, 0.25);
-      border: none;
-      outline: none;
-      font-family: "Poppins", sans-serif, system-ui;
-      color: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      height: 35px;
-      width: 80px;
-      font-size: 14px;
-      text-transform: capitalize;
-      &:active {
-        transform: scale(0.95);
-      }
-    }
-    div {
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-      margin: 0 5px;
-      border-radius: 4px;
-      color: #fff;
-    }
+    align-items: center;
+    padding: 0 10px;
+    margin: 0 5px;
+    border-radius: 4px;
+    color: #fff;
   }
 }
 

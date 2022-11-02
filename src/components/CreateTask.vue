@@ -5,7 +5,6 @@
       ref="input"
       type="text"
       placeholder="write a name for task..."
-      @blur="createMode = false"
       @keypress.enter="createAction"
     />
     <button @click="createAction">create</button>
@@ -16,26 +15,26 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, nextTick } from "vue"
-import { useTasks } from "@/composable/tasks"
+import { ref, nextTick } from "vue";
+import { useTasks } from "@/composable/tasks";
 
-const { createTask } = useTasks()
+const { createTask } = useTasks();
 
-const createMode = ref<boolean>(false)
-const newTask = ref<string>("")
-const input = ref<HTMLInputElement>()
+const createMode = ref<boolean>(false);
+const newTask = ref<string>("");
+const input = ref<HTMLInputElement>();
 
 const switchToCreateMode = async () => {
-  createMode.value = true
-  await nextTick()
-  input.value?.focus()
-}
+  createMode.value = true;
+  await nextTick();
+  input.value?.focus();
+};
 
 const createAction = () => {
-  if (newTask.value === "") return
-  createTask(newTask.value)
-  newTask.value = ""
-}
+  if (newTask.value === "") return;
+  createTask(newTask.value);
+  newTask.value = "";
+};
 </script>
 
 <style lang="scss" scoped>
@@ -47,7 +46,7 @@ const createAction = () => {
   background-color: rgba(0, 0, 0, 0.1);
   text-align: center;
   border: 2px dashed rgba(255, 255, 255, 0.4);
-  height: 55px;
+  height: 60px;
   opacity: 0.8;
   cursor: pointer;
   margin-top: 20px;
@@ -66,7 +65,7 @@ const createAction = () => {
   margin-top: 20px;
   input {
     width: 100%;
-    height: 59px;
+    height: 60px;
     outline: none;
     border: none;
     background-color: transparent;
