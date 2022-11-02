@@ -43,7 +43,6 @@ body {
   background-color: var(--status-color);
   transition: background-color 0.75s;
 }
-<<<<<<< HEAD
 #descriptionBody {
   font-family: ArialRounded, sans-serif;
   padding: 2rem;
@@ -77,5 +76,3 @@ body {
 .html-section .html-section__hashtag {
   color: rgb(194, 50, 31)
 }
-=======
->>>>>>> a7eeddf (comeback after #MahsaAmini events! (finally))
