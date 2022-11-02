@@ -5,6 +5,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  *::-webkit-scrollbar {
+    @apply w-3 bg-gray-200;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply w-3 bg-stone-400 rounded-sm;
+  }
+}
+
 :root {
   --bg-glass: rgba(255, 255, 255, 0.15);
 }
