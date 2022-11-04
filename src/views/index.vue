@@ -160,6 +160,7 @@ const Tasks: Component = defineAsyncComponent(
 </script>
 
 <style lang="scss">
+
 main {
   display: flex;
   align-items: center;
