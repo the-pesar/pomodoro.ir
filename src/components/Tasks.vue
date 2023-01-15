@@ -1,6 +1,8 @@
 <template>
-  <CreateTask />
-  <Task v-for="task in tasks" :key="task.id" :task="task"></Task>
+  <div class="pb-10">
+    <CreateTask />
+    <Task v-for="task in tasks" :key="task.id" :task="task"></Task>
+  </div>
 </template>
 <script lang="ts" setup>
 import { Component, defineAsyncComponent } from "vue"

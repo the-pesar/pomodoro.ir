@@ -15,26 +15,26 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, nextTick } from "vue";
-import { useTasks } from "@/composable/tasks";
+import { ref, nextTick } from "vue"
+import { useTasks } from "@/composable/tasks"
 
-const { createTask } = useTasks();
+const { createTask } = useTasks()
 
-const createMode = ref<boolean>(false);
-const newTask = ref<string>("");
-const input = ref<HTMLInputElement>();
+const createMode = ref<boolean>(false)
+const newTask = ref<string>("")
+const input = ref<HTMLInputElement>()
 
 const switchToCreateMode = async () => {
-  createMode.value = true;
-  await nextTick();
-  input.value?.focus();
-};
+  createMode.value = true
+  await nextTick()
+  input.value?.focus()
+}
 
 const createAction = () => {
-  if (newTask.value === "") return;
-  createTask(newTask.value);
-  newTask.value = "";
-};
+  if (newTask.value === "") return
+  createTask(newTask.value)
+  newTask.value = ""
+}
 </script>
 
 <style lang="scss" scoped>
@@ -92,6 +92,9 @@ const createAction = () => {
     font-weight: 600;
     font-size: 16px;
     margin: 10px;
+    &:active {
+      transform: scale(0.95);
+    }
   }
 }
 </style>

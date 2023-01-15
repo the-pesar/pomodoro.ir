@@ -10,13 +10,11 @@
 }
 
 *::-webkit-scrollbar {
-  width: 12px;
-  background: rgb(221, 221, 221);
+  display: none;
 }
 
 *::-webkit-scrollbar-thumb {
-  width: 12px;
-  background: var(--status-color);
+  display: none;
 }
 
 body[status="focus"] {
@@ -53,7 +51,8 @@ body {
   background-color: var(--status-color);
   transition: background-color 0.75s;
 }
-#descriptionBody {
+
+#description {
   font-family: ArialRounded, sans-serif;
   padding: 2rem;
 }

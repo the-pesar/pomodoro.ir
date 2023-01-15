@@ -1,4 +1,4 @@
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { v4 as uuidv4 } from "uuid"
 
 export interface TaskI {
@@ -11,14 +11,11 @@ export interface TaskI {
   count: number
 }
 
-interface UpdateTaskI {
-  focus?: boolean
-  shortBreak?: boolean
-  longBreak?: boolean
-  count?: boolean
-}
-
 const tasks = ref<TaskI[]>([])
+
+const selectedTask = computed<TaskI | undefined>(() =>
+  tasks.value.find((v) => v.selected)
+)
 
 function initTasks() {
   const localTasks = localStorage.getItem("tasks")
@@ -52,6 +49,7 @@ function deleteTask(id: string) {
 }
 
 function selectTask(id: string) {
+  console.log(id)
   tasks.value = tasks.value.map((task) => {
     if (id === task.id) task.selected = true
     else task.selected = false
@@ -62,13 +60,15 @@ function selectTask(id: string) {
 
 function updateTask(
   id: string,
-  { focus, shortBreak, longBreak, count }: UpdateTaskI
+  key: "focus" | "short-break" | "long-break" | "count"
 ) {
   const i = tasks.value.findIndex((v) => v.id === id)
-  if (focus) tasks.value[i].focus++
-  if (shortBreak) tasks.value[i].shortBreak++
-  if (longBreak) tasks.value[i].longBreak++
-  if (count) tasks.value[i].count++
+  if (key === "focus") tasks.value[i].focus++
+  if (key === "short-break") tasks.value[i].shortBreak++
+  if (key === "long-break") {
+    tasks.value[i].longBreak++
+    tasks.value[i].count++
+  }
   localStorage.setItem("tasks", JSON.stringify(tasks.value))
 }
 
@@ -79,5 +79,5 @@ initTasks()
 // createTask("improve programming Knowledge")
 
 export function useTasks() {
-  return { tasks, createTask, deleteTask, selectTask, updateTask }
+  return { tasks, selectedTask, createTask, deleteTask, selectTask, updateTask }
 }
