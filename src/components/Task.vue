@@ -5,19 +5,39 @@
       <button @click="selectTask(task.id)">
         {{ task.selected ? "selected" : "select" }}
       </button>
-      <div v-text="task.count"></div>
+      <!-- <div class="cursor-pointer mx-2" @click="selectTask(task.id)">
+        <img
+          v-if="task.selected"
+          src="@/assets/icons/pause-fill.svg"
+          width="18"
+          alt=""
+        />
+        <img v-else src="@/assets/icons/play-fill.svg" width="18" alt="" />
+      </div> -->
+      <div class="box mx-2">
+        <img class="cursor-pointer" src="@/assets/icons/edit.svg" width="18" />
+      </div>
+      <div class="box mx-2">
+        <img
+          class="cursor-pointer"
+          src="@/assets/icons/trash-fill.svg"
+          width="18"
+          @click="deleteTask(task.id)"
+        />
+      </div>
+      <!-- <div v-text="task.count"></div> -->
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { defineProps } from "vue";
-import { TaskI, useTasks } from "@/composable/tasks";
+import { defineProps } from "vue"
+import { TaskI, useTasks } from "@/composable/tasks"
 
-const { selectTask } = useTasks();
+const { selectTask, deleteTask } = useTasks()
 
 defineProps<{
-  task: TaskI;
-}>();
+  task: TaskI
+}>()
 </script>
 <style lang="scss" scoped>
 .task {
@@ -45,21 +65,23 @@ defineProps<{
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-    height: 35px;
-    width: 80px;
+    height: auto;
+    width: 75px;
     font-size: 14px;
+    margin: 0 5px;
     text-transform: capitalize;
     &:active {
       transform: scale(0.95);
     }
   }
-  div {
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    margin: 0 5px;
-    border-radius: 4px;
-    color: #fff;
+  .box {
+    background-color: rgba(255, 255, 255, 0.25);
+    margin: 0px 5px;
+    padding: 7px;
+    border-radius: 5px;
+    &:active {
+      transform: scale(0.9);
+    }
   }
 }
 
