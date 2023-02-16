@@ -43,17 +43,17 @@ const tabs: TabI[] = [
   {
     name: "focus",
     text: "Focus",
-    time: 10, // 1500
+    time: 1500, // 1500
   },
   {
     name: "short-break",
     text: "Short Break",
-    time: 10, // 300
+    time: 300, // 300
   },
   {
     name: "long-break",
     text: "Long Break",
-    time: 10, // 900
+    time: 900, // 900
   },
 ]
 
