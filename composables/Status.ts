@@ -6,7 +6,7 @@ export interface StatusI {
   name: "focus" | "short-break" | "long-break"
   text: string
   time: number
-  color: "#d95550" | "#4c9195" | "#457ca3"
+  color: "#ba4949" | "#61764b" | "#2f5d62"
   active: boolean
 }
 
@@ -19,21 +19,21 @@ const statuses = ref<StatusI[]>([
     name: "focus",
     text: "Focus",
     time: 1500, // 1500
-    color: "#d95550",
+    color: "#ba4949",
     active: false,
   },
   {
     name: "short-break",
     text: "Short Break",
     time: 300, // 300,
-    color: "#4c9195",
+    color: "#61764b",
     active: false,
   },
   {
     name: "long-break",
     text: "Long Break",
     time: 900, // 900
-    color: "#457ca3",
+    color: "#2f5d62",
     active: false,
   },
 ])
@@ -45,10 +45,11 @@ function setStatus(newStatus: "focus" | "short-break" | "long-break") {
     return v
   })
   if (process.client) document.body.setAttribute("status", newStatus)
-  if (process.client)
+  if (process.client) {
     document.head
       .querySelector("meta[name='theme-color']")
       ?.setAttribute("content", status.value?.color as string)
+  }
 }
 
 function nextStatus() {

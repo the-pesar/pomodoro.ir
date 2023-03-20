@@ -21,7 +21,6 @@ export default defineNuxtConfig({
     },
     client: {
       installPrompt: true,
-      periodicSyncForUpdates: 20,
     },
     workbox: { navigateFallback: "/" },
     devOptions: { enabled: true, type: "module" },

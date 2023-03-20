@@ -17,15 +17,15 @@
 }
 
 body[status="focus"] {
-  --status-color: rgb(186, 73, 73);
+  --status-color: #ba4949;
 }
 
 body[status="short-break"] {
-  --status-color: #61764B;
+  --status-color: #61764b;
 }
 
 body[status="long-break"] {
-  --status-color: #2F5D62;
+  --status-color: #2f5d62;
 }
 
 body {
@@ -55,11 +55,24 @@ button.timer-action {
   animation: expand 0.65s;
 }
 
+.fade-in-animation {
+  animation: fade-in 0.85s;
+}
+
 @keyframes expand {
   from {
     transform: scaleY(0);
   }
   to {
     transform: scaleY(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
