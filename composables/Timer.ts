@@ -30,7 +30,7 @@ function startTimer() {
       time.value = status.value?.time as number
       startTimer()
     }
-  }, 10)
+  }, 1000)
 }
 
 function stopTimer() {
