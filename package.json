@@ -15,6 +15,7 @@
     "nuxt": "^3.2.3"
   },
   "dependencies": {
+    "@vercel/analytics": "^0.1.11",
     "uuid": "^9.0.0"
   }
 }

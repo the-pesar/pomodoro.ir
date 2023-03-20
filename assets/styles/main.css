@@ -31,9 +31,15 @@ body[status="long-break"] {
 body {
   direction: rtl;
   font-family: "Vazirmatn", sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 main.pmdr {
+  background-color: var(--status-color);
+  transition: background-color 0.75s;
+}
+
+section.footer {
   background-color: var(--status-color);
   transition: background-color 0.75s;
 }
