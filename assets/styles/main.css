@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@700&display=swap");
+:root {
+  --bg-glass: rgba(255, 255, 255, 0.15);
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+*::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+@font-face {
+  font-family: "clockicons";
+  src: url("~/assets/fonts/clockicons.ttf");
+}
+
+body[status="focus"] {
+  --status-color: rgb(186, 73, 73);
+}
+
+body[status="short-break"] {
+  --status-color: #61764B;
+}
+
+body[status="long-break"] {
+  --status-color: #2F5D62;
+}
+
+body {
+  direction: rtl;
+  font-family: "Vazirmatn", sans-serif;
+}
+
+main.pmdr {
+  background-color: var(--status-color);
+  transition: background-color 0.75s;
+}
+
+button.timer-action {
+  color: var(--status-color);
+  transition: color 0.5s;
+}
+
+.bg-glass {
+  background-color: hsla(0, 0%, 100%, 0.15);
+}
+
+.hashtag {
+  color: var(--status-color);
+}
+
+.expand-animation {
+  animation: expand 0.65s;
+}
+
+@keyframes expand {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
