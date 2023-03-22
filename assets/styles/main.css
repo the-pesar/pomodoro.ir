@@ -37,6 +37,9 @@ body {
 main.pmdr {
   background-color: var(--status-color);
   transition: background-color 0.75s;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 section.footer {

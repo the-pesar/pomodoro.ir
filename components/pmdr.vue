@@ -40,7 +40,7 @@
       <section
         class="flex flex-col bg-glass mt-2.5 pt-10 rounded-lg font-['clockicons'] text-white text-center"
       >
-        <span class="text-[150px]">{{ timer }}</span>
+        <span class="text-[130px] md:text-[150px]">{{ timer }}</span>
         <div class="py-10">
           <button
             v-if="!timing"
@@ -51,13 +51,13 @@
           </button>
           <template v-else>
             <button
-              class="timer-action bg-white w-[160px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg ml-2.5"
+              class="timer-action bg-white w-[150px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg ml-2.5"
               @click="restTimer"
             >
               دوباره
             </button>
             <button
-              class="timer-action bg-white w-[160px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg mr-2.5"
+              class="timer-action bg-white w-[150px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg mr-2.5"
               @click="stopTimer"
             >
               مکث
@@ -117,12 +117,12 @@
           </div>
           <div
             v-else
-            class="expand-animation bg-glass flex justify-between rounded-lg border-r-8 text-white p-4 mt-4"
+            class="expand-animation bg-glass flex flex-col items-center md:justify-between md:flex-row rounded-lg border-r-8 text-white p-4 mt-4"
           >
             <div class="flex items-center">
               {{ t.name }}
             </div>
-            <div class="flex">
+            <div class="flex mt-4 md:mt-0">
               <button
                 class="bg-glass py-1 px-3 rounded-lg text-white outline-none ml-1"
                 @click="selectTask(t.id)"
@@ -198,8 +198,9 @@ const editTaskAction = (id: string, newName: string) => {
 }
 
 const startTimerAction = () => {
-  if(tasks.value.find((v) => v.selected)) startTimer()
+  if (tasks.value.find((v) => v.selected)) startTimer()
 }
+console.log("test")
 </script>
 
 <style>
