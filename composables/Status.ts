@@ -2,19 +2,11 @@ import { useTasks } from "~/composables/Tasks"
 
 const { tasks, updateTask } = useTasks()
 
-export interface StatusI {
-  name: "focus" | "short-break" | "long-break"
-  text: string
-  time: number
-  color: "#ba4949" | "#61764b" | "#2f5d62"
-  active: boolean
-}
-
-const status = computed<StatusI | undefined>(() =>
+const status = computed<IStatus | undefined>(() =>
   statuses.value.find((v) => v.active)
 )
 
-const statuses = ref<StatusI[]>([
+const statuses = ref<IStatus[]>([
   {
     name: "focus",
     text: "Focus",
@@ -38,10 +30,9 @@ const statuses = ref<StatusI[]>([
   },
 ])
 
-function setStatus(newStatus: "focus" | "short-break" | "long-break") {
+function setStatus(newStatus: TimeLength) {
   statuses.value = statuses.value.map((v) => {
-    if (v.name === newStatus) v.active = true
-    else v.active = false
+    v.active = v.name === newStatus;
     return v
   })
   if (process.client) document.body.setAttribute("status", newStatus)
@@ -57,6 +48,7 @@ function nextStatus() {
   switch (status.value?.name) {
     case "focus":
       updateTask(tasks.value[i].id, "focus")
+      // TODO -> remove console.log
       console.log(tasks.value[i].focus % 4)
       if (tasks.value[i].focus % 4 === 0) {
         setStatus("long-break")

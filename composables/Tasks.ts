@@ -1,18 +1,9 @@
 import { v4 as uuidv4 } from "uuid"
 
-interface TaskI {
-  id: string
-  name: string
-  selected: boolean
-  focus: number
-  shortBreak: number
-  longBreak: number
-}
-
-const tasks = ref<TaskI[]>([])
+const tasks = ref<ITask[]>([])
 
 function createTask(name: string) {
-  const task: TaskI = {
+  const task: ITask = {
     id: uuidv4(),
     name,
     selected: false,
@@ -32,8 +23,8 @@ function deleteTask(id: string) {
   return task
 }
 
-function selectTask(id: string): TaskI | null {
-  let selectedTask: TaskI | null = null
+function selectTask(id: string): ITask | null {
+  let selectedTask: ITask | null = null
   tasks.value = tasks.value.map((task) => {
     if (task.id === id) {
       task.selected = true
@@ -45,7 +36,8 @@ function selectTask(id: string): TaskI | null {
   return selectedTask
 }
 
-function editTask(id: string, newName: string): TaskI {
+function editTask(id: string, newName: string): ITask {
+  // TODO -> remove console.log
   console.log(newName)
 
   const i = tasks.value.findIndex((task) => task.id === id)
@@ -56,8 +48,8 @@ function editTask(id: string, newName: string): TaskI {
 
 function updateTask(
   id: string,
-  property: "focus" | "shortBreak" | "longBreak"
-): TaskI {
+  property: ITaskTime
+): ITask {
   const i = tasks.value.findIndex((task) => task.id === id)
   tasks.value[i][property]++
   localStorage.setItem("tasks", JSON.stringify(tasks.value))

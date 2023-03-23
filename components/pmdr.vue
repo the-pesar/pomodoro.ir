@@ -174,9 +174,9 @@ const editingTasks = ref<string[]>([])
 
 const activeTab = computed({
   get: () => {
-    return status.value?.name as "focus" | "short-break" | "long-break"
+    return status.value?.name as TimeLength
   },
-  set: (newTab: "focus" | "short-break" | "long-break") => {
+  set: (newTab: TimeLength) => {
     setStatus(newTab)
     restTimer()
     time.value = status.value?.time as number
