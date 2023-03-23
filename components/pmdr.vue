@@ -1,13 +1,11 @@
 <template>
   <main class="pmdr w-full min-h-screen">
     <div
-      class="mx-auto w-12/12 md:w-10/12 lg:w-7/12 xl:w-5/12 2xl:w-4/12 py-5 px-3 md:px-10"
-    >
+      class="mx-auto w-12/12 md:w-10/12 lg:w-7/12 xl:w-5/12 2xl:w-4/12 py-5 px-3 md:px-10">
       <section
-        class="relative bg-glass text-center p-5 text-lg text-white rounded-lg"
-      >
+        class="relative bg-glass text-center p-5 text-lg text-white rounded-lg">
         <span>{{
-          tasks.find((v) => v.selected)?.name ?? "هنوز هیچ کاری انتخاب نشده!"
+          tasks.find((v) => v.selected)?.name ?? 'هنوز هیچ کاری انتخاب نشده!'
         }}</span>
       </section>
       <section class="bg-glass mt-2.5 rounded-lg">
@@ -15,51 +13,44 @@
           <div
             class="w-1/3 text-center p-4"
             :class="activeTab === 'focus' && 'active-tab'"
-            @click="activeTab = 'focus'"
-          >
+            @click="activeTab = 'focus'">
             <span>تمرکز</span>
           </div>
           <div
             class="w-1/3 text-center p-4"
             :class="activeTab === 'short-break' && 'active-tab'"
-            @click="activeTab = 'short-break'"
-          >
+            @click="activeTab = 'short-break'">
             <span>استراحت</span>
             <span class="text-xs"> کوتاه</span>
           </div>
           <div
             class="w-1/3 text-center p-4"
             :class="activeTab === 'long-break' && 'active-tab'"
-            @click="activeTab = 'long-break'"
-          >
+            @click="activeTab = 'long-break'">
             <span>استراحت</span>
             <span class="text-xs"> طولانی</span>
           </div>
         </div>
       </section>
       <section
-        class="flex flex-col bg-glass mt-2.5 pt-10 rounded-lg font-['clockicons'] text-white text-center"
-      >
+        class="flex flex-col bg-glass mt-2.5 pt-10 rounded-lg font-['clockicons'] text-white text-center">
         <span class="text-[130px] md:text-[150px]">{{ timer }}</span>
         <div class="py-10">
           <button
             v-if="!timing"
             class="timer-action bg-white w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg"
-            @click="startTimerAction"
-          >
+            @click="startTimerAction">
             بریم
           </button>
           <template v-else>
             <button
               class="timer-action bg-white w-[150px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg ml-2.5"
-              @click="restTimer"
-            >
+              @click="restTimer">
               دوباره
             </button>
             <button
               class="timer-action bg-white w-[150px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg mr-2.5"
-              @click="stopTimer"
-            >
+              @click="stopTimer">
               مکث
             </button>
           </template>
@@ -72,83 +63,70 @@
             class="bg-transparent outline-none h-[64px] w-full rounded-lg px-3 text-white border-r-8"
             type="text"
             placeholder="یه اسم برای کار جدید بنویس..."
-            @keypress.enter="createTaskAction"
-          />
+            @keypress.enter="createTaskAction" />
           <button
             class="bg-glass py-2 px-4 m-3 rounded-lg text-white outline-none"
-            @click="createTaskAction"
-          >
+            @click="createTaskAction">
             ساختن
           </button>
         </div>
         <template v-for="t in tasks" :key="t.id">
           <div
             v-if="editingTasks.some((v) => v === t.id)"
-            class="bg-glass flex justify-between rounded-lg border-r-8 text-white mt-4"
-          >
+            class="bg-glass flex justify-between rounded-lg border-r-8 text-white mt-4">
             <input
               v-model="t.name"
               class="bg-transparent outline-none h-[64px] w-full rounded-lg px-4 text-white"
               type="text"
               @keypress.enter="editTaskAction(t.id, t.name)"
-              v-focus
-            />
+              v-focus />
             <button
-              class="edit bg-glass p-1 my-4 mx-2 rounded-lg cursor-pointer"
+              class="dit bg-glass p-1 my-4 mx-2 rounded-lg cursor-pointer"
               @click="
                 editingTasks.splice(
                   editingTasks.findIndex((v) => v === t.id),
                   1
                 )
-              "
-            >
+              ">
               <img
                 class="cursor-pointer"
                 src="@/assets/icons/close.svg"
-                width="35"
-              />
+                width="35" />
             </button>
             <button
               class="bg-glass py-1 px-3 rounded-lg text-white outline-none my-4 ml-4"
-              @click="editTaskAction(t.id, t.name)"
-            >
+              @click="editTaskAction(t.id, t.name)">
               ویرایش
             </button>
           </div>
           <div
             v-else
-            class="expand-animation bg-glass flex flex-col items-center md:justify-between md:flex-row rounded-lg border-r-8 text-white p-4 mt-4"
-          >
+            class="expand-animation bg-glass flex flex-col items-center md:justify-between md:flex-row rounded-lg border-r-8 text-white p-4 mt-4">
             <div class="flex items-center">
               {{ t.name }}
             </div>
             <div class="flex mt-4 md:mt-0">
               <button
                 class="bg-glass py-1 px-3 rounded-lg text-white outline-none ml-1"
-                @click="selectTask(t.id)"
-              >
+                @click="selectTask(t.id)">
                 <span v-if="t.selected">انتخاب‌شده</span>
                 <span v-else>انتخاب</span>
               </button>
               <div
                 class="edit bg-glass p-2 mx-1 rounded-lg cursor-pointer"
-                @click="editingTasks.push(t.id)"
-              >
+                @click="editingTasks.push(t.id)">
                 <img
                   class="cursor-pointer"
                   src="@/assets/icons/edit.svg"
-                  width="18"
-                />
+                  width="18" />
               </div>
               <div
                 class="delete bg-glass p-2 mr-1 rounded-lg cursor-pointer"
-                @click="deleteTask(t.id)"
-              >
+                @click="deleteTask(t.id)">
                 <img
                   class="cursor-pointer"
                   src="@/assets/icons/trash-fill.svg"
-                  width="18"
-                />
+                  width="18" />
               </div>
             </div>
           </div>
@@ -158,9 +136,9 @@
   </main>
 </template>
 <script lang="ts" setup>
-import { useTimer } from "~/composables/Timer"
-import { useStatus } from "~/composables/Status"
-import { useTasks } from "~/composables/Tasks"
+import { useTimer } from '~/composables/Timer'
+import { useStatus } from '~/composables/Status'
+import { useTasks } from '~/composables/Tasks'
 
 const vFocus = {
   mounted: (el: HTMLInputElement) => el.focus(),
@@ -169,7 +147,7 @@ const { time, timer, startTimer, stopTimer, restTimer, timing } = useTimer()
 const { status, setStatus } = useStatus()
 const { tasks, createTask, deleteTask, selectTask, editTask } = useTasks()
 
-const newTask = ref<string>("")
+const newTask = ref<string>('')
 const editingTasks = ref<string[]>([])
 
 const activeTab = computed({
@@ -186,7 +164,7 @@ const activeTab = computed({
 const createTaskAction = () => {
   if (!newTask.value) return
   createTask(newTask.value)
-  newTask.value = ""
+  newTask.value = ''
 }
 
 const editTaskAction = (id: string, newName: string) => {
@@ -200,7 +178,7 @@ const editTaskAction = (id: string, newName: string) => {
 const startTimerAction = () => {
   if (tasks.value.find((v) => v.selected)) startTimer()
 }
-console.log("test")
+console.log('test')
 </script>
 
 <style>
