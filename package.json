@@ -9,7 +9,7 @@
     "analyze": "nuxi analyze"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.4.1",
+    "@nuxtjs/tailwindcss": "^6.6.4",
     "@types/uuid": "^9.0.1",
     "@vite-pwa/nuxt": "^0.0.7",
     "nuxt": "^3.2.3",
