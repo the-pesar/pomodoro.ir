@@ -12,7 +12,7 @@
         <div class="flex text-white cursor-pointer">
           <div
             class="w-1/3 text-center p-4"
-            :class="activeTab === 'focus' && 'active-tab'"
+            :class="activeTab === 'focus' && 'active-tab rounded-tr-lg'"
             @click="activeTab = 'focus'">
             <span>تمرکز</span>
           </div>
@@ -25,7 +25,7 @@
           </div>
           <div
             class="w-1/3 text-center p-4"
-            :class="activeTab === 'long-break' && 'active-tab'"
+            :class="activeTab === 'long-break' && 'active-tab rounded-tl-lg'"
             @click="activeTab = 'long-break'">
             <span>استراحت</span>
             <span class="text-xs"> طولانی</span>

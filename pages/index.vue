@@ -1,8 +1,9 @@
 <template>
-  <ClientOnly>
+  <!-- <ClientOnly> -->
+    <Notif />
     <Pmdr />
     <Ad />
-  </ClientOnly>
+  <!-- </ClientOnly> -->
   <Desc />
   <Footer />
 </template>
