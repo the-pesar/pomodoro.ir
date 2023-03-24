@@ -1,0 +1,196 @@
+{
+    "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+    "name": "app name",
+    "short_name": "app short name",
+    "description": "A simple app that does things.",
+    "icons": [
+        {
+            "src": "/pwa-48x48.png",
+            "sizes": "48x48",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/pwa-48x48.png",
+            "sizes": "48x48",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/pwa-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/pwa-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/pwa-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/pwa-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/pwa-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/pwa-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/pwa-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/pwa-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/pwa-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/pwa-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/pwa-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/pwa-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/pwa-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/pwa-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/pwa-284x284.png",
+            "sizes": "284x284",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/pwa-284x284.png",
+            "sizes": "284x284",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/pwa-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/pwa-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/pwa-screenshot-800x484.png",
+            "sizes": "800x484",
+            "type": "image/png",
+            "purpose": "any maskable monochrome",
+            "platform": "wide"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "",
+            "short_name": "",
+            "description": "",
+            "url": "",
+            "icons": [
+                {
+                    "src": "",
+                    "sizes": "500x500",
+                    "type": "image/png",
+                    "purpose": "any maskable monochrome"
+                }
+            ]
+        }
+    ],
+    "iarc_rating_id": "",
+    "start_url": "/",
+    "scope": "/",
+    "id": "/",
+    "display_override": [
+        "fullscreen"
+    ],
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "background_color": "#ffffff",
+    "theme_color": "#3367d6",
+    "prefer_related_applications": false,
+    "related_applications": [
+        {
+            "platform": "windows",
+            "url": "https://www.example-app.com",
+            "id": "example.ExampleApp"
+        },
+        {
+            "platform": "play",
+            "url": "https://play.google.com/store/apps/details?id=cheeaun.hackerweb"
+        }
+    ],
+    "protocol_handlers": [
+        {
+            "protocol": "web+music",
+            "url": "/play?track=%s"
+        }
+    ],
+    "categories": [
+        "games",
+        "finance",
+        "navigation"
+    ],
+    "dir": "rtl",
+    "lang": "fa",
+    "author": "author",
+    "version": "3.0.0",
+    "manifest_version": 3,
+    "incognito": "not_allowed",
+    "launch_handler": {
+        "client_mode": "navigate-new"
+    }
+}
