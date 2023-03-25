@@ -139,6 +139,9 @@
 import { useTimer } from '~/composables/Timer'
 import { useStatus } from '~/composables/Status'
 import { useTasks } from '~/composables/Tasks'
+import { useNotif } from '~/composables/Notif'
+
+const { error } = useNotif()
 
 const vFocus = {
   mounted: (el: HTMLInputElement) => el.focus(),
@@ -177,8 +180,8 @@ const editTaskAction = (id: string, newName: string) => {
 
 const startTimerAction = () => {
   if (tasks.value.find((v) => v.selected)) startTimer()
+  else error("اول از همه یه کار جدید بساز و انتخاب کن!")
 }
-console.log('test')
 </script>
 
 <style>

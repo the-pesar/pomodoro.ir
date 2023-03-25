@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@700&display=swap');
 :root {
   --bg-glass: rgba(255, 255, 255, 0.15);
 }
@@ -12,25 +12,25 @@
 }
 
 @font-face {
-  font-family: "clockicons";
-  src: url("~/assets/fonts/clockicons.ttf");
+  font-family: 'clockicons';
+  src: url('~/assets/fonts/clockicons.ttf');
 }
 
-body[status="focus"] {
+body[status='focus'] {
   --status-color: #ba4949;
 }
 
-body[status="short-break"] {
+body[status='short-break'] {
   --status-color: #61764b;
 }
 
-body[status="long-break"] {
+body[status='long-break'] {
   --status-color: #2f5d62;
 }
 
 body {
   direction: rtl;
-  font-family: "Vazirmatn", sans-serif;
+  font-family: 'Vazirmatn', sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
