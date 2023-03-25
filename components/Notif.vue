@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="show"
-    class="absolute z-10 right-7 top-7 mx-auto w-fit bg-white flex p-5 rounded-lg">
+    class="absolute z-10 max-xl:left-0 max-xl:right-0 right-10 top-10 mx-auto w-fit bg-white flex p-5 rounded-lg">
     <svg
       width="24"
       height="24"
