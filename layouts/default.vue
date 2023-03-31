@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
-      navigator.serviceWorker.register("ServiceWorker/index.js")
+      navigator.serviceWorker.register("/ServiceWorker/index.js")
         .then(registration => {
           registration.update();
         })

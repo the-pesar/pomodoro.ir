@@ -1,6 +1,6 @@
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open('cache-v1-pwa')
+        caches.open('cache-pomodoro.ir-v1-pwa')
             .then(cache => {
                 return cache.addAll([
                     '/'
@@ -14,7 +14,7 @@ self.addEventListener('activate', event => {
         caches.keys()
             .then(keys => {
                 return Promise.all(
-                    keys.filter(key => key !== 'cache-v1-pwa')
+                    keys.filter(key => key !== 'cache-pomodoro.ir-v1-pwa')
                         .map(key => caches.delete(key))
                 )
             })
