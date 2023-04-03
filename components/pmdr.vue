@@ -122,7 +122,7 @@
               </div>
               <div
                 class="delete bg-glass p-2 mr-1 rounded-lg cursor-pointer"
-                @click="deleteTask(t.id)">
+                @click="deleteTaskAction(t.id)">
                 <img
                   class="cursor-pointer"
                   src="@/assets/icons/trash-fill.svg"
@@ -181,6 +181,11 @@ const editTaskAction = (id: string, newName: string) => {
 const startTimerAction = () => {
   if (tasks.value.find((v) => v.selected)) startTimer()
   else error("اول از همه یه کار جدید بساز و انتخاب کن!")
+}
+
+const deleteTaskAction = (id: string) => {
+  deleteTask(id)
+  restTimer()
 }
 </script>
 
