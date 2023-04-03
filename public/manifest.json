@@ -136,9 +136,9 @@
     ],
     "shortcuts": [
         {
-            "name": "",
-            "short_name": "",
-            "description": "",
+            "name": "example name",
+            "short_name": "example short name",
+            "description": "example description",
             "url": "",
             "icons": [
                 {
