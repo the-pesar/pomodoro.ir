@@ -1,9 +1,9 @@
-import { useStatus } from "~/composables/Status"
+import { useStatus } from '~/composables/Status'
 
 const { status, nextStatus } = useStatus()
 
 const alertSound: HTMLAudioElement | null = ((isClient) =>
-  isClient ? new Audio("/sounds/alarm-bell.mp3") : null)(process.client)
+  isClient ? new Audio('/sounds/alarm-bell.mp3') : null)(process.client)
 
 const time = ref<number>(status.value?.time ?? 0)
 
@@ -41,6 +41,7 @@ function stopTimer() {
 function restTimer() {
   stopTimer()
   time.value = status.value?.time ?? 0
+  useHead({ title: 'پومودورو' })
 }
 
 const timing = computed<boolean>(() => !!timeInterval.value)
