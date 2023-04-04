@@ -12,6 +12,20 @@ self.addEventListener('install', event => {
         }),
     )
 })
+self.addEventListener('periodicsync', event => {
+    if (event.tag === 'pomodoro-sync') {
+        event.waitUntil(
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    caches.open('cache-pomodoro.ir-v1-pwa')
+                        .then(cache => {
+                            cache.put('/api/data', new Response(JSON.stringify(data)))
+                        })
+                })
+        )
+    }
+})
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys()
