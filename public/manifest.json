@@ -131,26 +131,28 @@
             "sizes": "800x484",
             "type": "image/png",
             "purpose": "any maskable monochrome",
-            "platform": "wide"
+            "platform": "wide",
+            "form_factor": "wide",
+            "label": "With Software, you can select a part of your screen and take a screenshot in seconds."
         }
     ],
     "shortcuts": [
         {
-            "name": "",
-            "short_name": "",
-            "description": "",
+            "name": "example name",
+            "short_name": "example short name",
+            "description": "example description",
             "url": "",
             "icons": [
                 {
                     "src": "",
-                    "sizes": "500x500",
+                    "sizes": "96x96",
                     "type": "image/png",
                     "purpose": "any maskable monochrome"
                 }
             ]
         }
     ],
-    "iarc_rating_id": "",
+    "iarc_rating_id": "99999999999999",
     "start_url": "/",
     "scope": "/",
     "id": "/",
@@ -192,5 +194,14 @@
     "incognito": "not_allowed",
     "launch_handler": {
         "client_mode": "navigate-new"
+    },
+    "share_target": {
+        "action": "/shared-content-receiver/",
+        "method": "GET",
+        "params": {
+            "title": "name",
+            "text": "description",
+            "url": "link"
+        }
     }
 }
