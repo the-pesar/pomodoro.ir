@@ -2,12 +2,7 @@
   <main class="pmdr w-full min-h-screen">
     <div
       class="mx-auto w-12/12 md:w-10/12 lg:w-7/12 xl:w-5/12 2xl:w-4/12 py-5 px-3 md:px-10">
-      <section
-        class="relative bg-glass text-center p-5 text-lg text-white rounded-lg">
-        <span>{{
-          tasks.find((v) => v.selected)?.name ?? 'هنوز هیچ کاری انتخاب نشده!'
-        }}</span>
-      </section>
+      <SelectedTask />
       <section class="bg-glass mt-2.5 rounded-lg">
         <div class="flex text-white cursor-pointer">
           <div
@@ -108,7 +103,7 @@
             <div class="flex mt-4 md:mt-0">
               <button
                 class="bg-glass py-1 px-3 rounded-lg text-white outline-none ml-1"
-                @click="selectTask(t.id)">
+                @click="selectTaskAction(t.id)">
                 <span v-if="t.selected">انتخاب‌شده</span>
                 <span v-else>انتخاب</span>
               </button>
@@ -148,7 +143,8 @@ const vFocus = {
 }
 const { time, timer, startTimer, stopTimer, restTimer, timing } = useTimer()
 const { status, setStatus } = useStatus()
-const { tasks, createTask, deleteTask, selectTask, editTask } = useTasks()
+const { tasks, createTask, deleteTask, selectTask, editTask, selectedTask } =
+  useTasks()
 
 const newTask = ref<string>('')
 const editingTasks = ref<string[]>([])
@@ -180,11 +176,17 @@ const editTaskAction = (id: string, newName: string) => {
 
 const startTimerAction = () => {
   if (tasks.value.find((v) => v.selected)) startTimer()
-  else error("اول از همه یه کار جدید بساز و انتخاب کن!")
+  else error('اول از همه یه کار جدید بساز و انتخاب کن!')
 }
 
 const deleteTaskAction = (id: string) => {
   deleteTask(id)
+  restTimer()
+}
+
+const selectTaskAction = (id: string) => {
+  if (selectedTask.value?.id === id) return
+  selectTask(id)
   restTimer()
 }
 </script>

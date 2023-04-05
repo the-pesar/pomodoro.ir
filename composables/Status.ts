@@ -2,10 +2,6 @@ import { useTasks } from '~/composables/Tasks'
 
 const { tasks, updateTask } = useTasks()
 
-const status = computed<IStatus | undefined>(() =>
-  statuses.value.find((v) => v.active)
-)
-
 const statuses = ref<IStatus[]>([
   {
     name: 'focus',
@@ -29,6 +25,10 @@ const statuses = ref<IStatus[]>([
     active: false,
   },
 ])
+
+const status = computed<IStatus>(() => {
+  return statuses.value.find((v) => v.active) as IStatus
+})
 
 function setStatus(newStatus: TimeLength) {
   statuses.value = statuses.value.map((v) => {
