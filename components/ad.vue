@@ -5,7 +5,7 @@
     target="_blank"
   >
     <div class="flex items-center bg-glass fade-in-animation p-3 rounded-lg">
-      <img :src="`/ad-icons/${ads[randomAdIndex].icon}`" width="35" />
+      <img :src="`/ad-icons/${ads[randomAdIndex].icon}`" width="35" alt="Advertise" />
       <p class="text-white px-2" v-text="ads[randomAdIndex].text"></p>
     </div>
   </a>

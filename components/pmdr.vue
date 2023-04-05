@@ -86,7 +86,8 @@
               <img
                 class="cursor-pointer"
                 src="@/assets/icons/close.svg"
-                width="35" />
+                width="35"
+                alt="Close" />
             </button>
             <button
               class="bg-glass py-1 px-3 rounded-lg text-white outline-none my-4 ml-4"
@@ -113,7 +114,8 @@
                 <img
                   class="cursor-pointer"
                   src="@/assets/icons/edit.svg"
-                  width="18" />
+                  width="18"
+                  alt="Edit" />
               </div>
               <div
                 class="delete bg-glass p-2 mr-1 rounded-lg cursor-pointer"
@@ -121,7 +123,8 @@
                 <img
                   class="cursor-pointer"
                   src="@/assets/icons/trash-fill.svg"
-                  width="18" />
+                  width="18"
+                  alt="Delete" />
               </div>
             </div>
           </div>
