@@ -100,11 +100,14 @@
             class="expand-animation bg-glass flex flex-col items-center md:justify-between md:flex-row rounded-lg border-r-8 text-white p-4 mt-4">
             <div class="flex items-center">
               <div
-                class="bg-glass px-3 pt-1 rounded-lg text-lg"
+                class="bg-glass px-3 pt-1 rounded-lg text-lg hidden md:block"
                 v-text="t.focus"></div>
               <span class="mx-3" v-text="t.name"></span>
             </div>
             <div class="flex mt-4 md:mt-0">
+              <div
+                class="bg-glass px-3 pt-1 ml-2 rounded-lg text-lg md:hidden"
+                v-text="t.focus"></div>
               <button
                 class="bg-glass py-1 px-3 rounded-lg text-white outline-none ml-1"
                 @click="selectTaskAction(t.id)">
