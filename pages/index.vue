@@ -2,8 +2,8 @@
   <Notif />
   <Pmdr />
   <Ad />
-  <Desc />
-  <Footer />
+  <!-- <Desc /> temporary -->
+  <!-- <Footer /> temporary -->
 </template>
 <script setup>
 useHead({
