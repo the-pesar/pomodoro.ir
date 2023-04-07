@@ -99,7 +99,10 @@
             v-else
             class="expand-animation bg-glass flex flex-col items-center md:justify-between md:flex-row rounded-lg border-r-8 text-white p-4 mt-4">
             <div class="flex items-center">
-              {{ t.name }}
+              <div
+                class="bg-glass px-3 pt-1 rounded-lg text-lg"
+                v-text="t.focus"></div>
+              <span class="mx-3" v-text="t.name"></span>
             </div>
             <div class="flex mt-4 md:mt-0">
               <button
