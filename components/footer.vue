@@ -1,5 +1,5 @@
 <template>
-  <section class="flex bg-[#161616]">
+  <section class="flex">
     <div class="flex items-center mx-auto py-2">
       <a href="https://github.com/the-pesar/pomodoro.ir">
         <img class="mx-1" src="/ad-icons/github.svg" alt="Github" />
@@ -10,3 +10,10 @@
     </div>
   </section>
 </template>
+
+<style scoped>
+section {
+  background-color: var(--status-color);
+  transition: background-color 0.5s;
+}
+</style>
