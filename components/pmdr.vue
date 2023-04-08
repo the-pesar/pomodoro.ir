@@ -6,24 +6,37 @@
       <section class="bg-glass mt-2.5 rounded-lg">
         <div class="flex text-white cursor-pointer">
           <div
-            class="w-1/3 text-center p-4"
+            class="flex w-1/3 justify-center p-4"
             :class="activeTab === 'focus' && 'active-tab rounded-tr-lg'"
             @click="activeTab = 'focus'">
-            <span>تمرکز</span>
+            <img class="w-[22px]" src="@/assets/icons/brain.svg" alt="charge" />
+            <span class="mx-4">تمرکز</span>
           </div>
           <div
-            class="w-1/3 text-center p-4"
+            class="flex justify-center w-1/3 p-4"
             :class="activeTab === 'short-break' && 'active-tab'"
             @click="activeTab = 'short-break'">
-            <span>استراحت</span>
-            <span class="text-xs"> کوتاه</span>
+            <img
+              class="w-[22px]"
+              src="@/assets/icons/muffin.svg"
+              alt="charge" />
+            <div class="mx-2">
+              <span>استراحت</span>
+              <span class="text-xs"> کوتاه</span>
+            </div>
           </div>
           <div
-            class="w-1/3 text-center p-4"
+            class="flex justify-center w-1/3 p-4"
             :class="activeTab === 'long-break' && 'active-tab rounded-tl-lg'"
             @click="activeTab = 'long-break'">
-            <span>استراحت</span>
-            <span class="text-xs"> طولانی</span>
+            <img
+              class="w-[22px]"
+              src="@/assets/icons/lightning-charge-fill.svg"
+              alt="charge" />
+            <div class="mx-2">
+              <span>استراحت</span>
+              <span class="text-xs"> طولانی</span>
+            </div>
           </div>
         </div>
       </section>
@@ -211,7 +224,7 @@ button:active {
 }
 
 input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .delete:active,
