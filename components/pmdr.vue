@@ -1,39 +1,39 @@
 <template>
   <main class="pmdr w-full min-h-screen">
     <div
-      class="mx-auto w-12/12 md:w-10/12 lg:w-7/12 xl:w-5/12 2xl:w-4/12 py-5 px-3 md:px-10">
+      class="mx-auto w-12/12 md:w-10/12 lg:w-7/12 xl:w-6/12 2xl:w-4/12 py-5 px-3 md:px-10">
       <SelectedTask />
       <section class="bg-glass mt-2.5 rounded-lg">
         <div class="flex text-white cursor-pointer">
           <div
-            class="flex w-1/3 justify-center p-4"
+            class="flex justify-center items-center flex-col md:flex-row w-1/3 p-3 md:p-4"
             :class="activeTab === 'focus' && 'active-tab rounded-tr-lg'"
             @click="activeTab = 'focus'">
             <img class="w-[22px]" src="@/assets/icons/brain.svg" alt="charge" />
-            <span class="mx-4">تمرکز</span>
+            <span class="my-2 md:my-0 md:mx-2">تمرکز</span>
           </div>
           <div
-            class="flex justify-center w-1/3 p-4"
+            class="flex justify-center items-center flex-col md:flex-row w-1/3 p-3 md:p-4"
             :class="activeTab === 'short-break' && 'active-tab'"
             @click="activeTab = 'short-break'">
             <img
               class="w-[22px]"
               src="@/assets/icons/muffin.svg"
               alt="charge" />
-            <div class="mx-2">
+            <div class="my-2 md:my-0 md:mx-2 text-center">
               <span>استراحت</span>
               <span class="text-xs"> کوتاه</span>
             </div>
           </div>
           <div
-            class="flex justify-center w-1/3 p-4"
+            class="flex justify-center items-center flex-col md:flex-row w-1/3 p-3 md:p-4"
             :class="activeTab === 'long-break' && 'active-tab rounded-tl-lg'"
             @click="activeTab = 'long-break'">
             <img
               class="w-[22px]"
               src="@/assets/icons/lightning-charge-fill.svg"
               alt="charge" />
-            <div class="mx-2">
+            <div class="my-2 md:my-0 md:mx-2 text-center">
               <span>استراحت</span>
               <span class="text-xs"> طولانی</span>
             </div>
