@@ -6,14 +6,14 @@
       <section class="bg-glass mt-2.5 rounded-lg">
         <div class="flex text-white cursor-pointer">
           <div
-            class="flex justify-center items-center flex-col md:flex-row w-1/3 p-3 md:p-4"
+            class="flex justify-center items-center flex-col md:flex-row w-1/3 pt-2 md:p-4"
             :class="activeTab === 'focus' && 'active-tab rounded-tr-lg'"
             @click="activeTab = 'focus'">
             <img class="w-[22px]" src="@/assets/icons/brain.svg" alt="charge" />
             <span class="my-2 md:my-0 md:mx-2">تمرکز</span>
           </div>
           <div
-            class="flex justify-center items-center flex-col md:flex-row w-1/3 p-3 md:p-4"
+            class="flex justify-center items-center flex-col md:flex-row w-1/3 pt-2 md:p-4"
             :class="activeTab === 'short-break' && 'active-tab'"
             @click="activeTab = 'short-break'">
             <img
@@ -26,7 +26,7 @@
             </div>
           </div>
           <div
-            class="flex justify-center items-center flex-col md:flex-row w-1/3 p-3 md:p-4"
+            class="flex justify-center items-center flex-col md:flex-row w-1/3 pt-2 md:p-4"
             :class="activeTab === 'long-break' && 'active-tab rounded-tl-lg'"
             @click="activeTab = 'long-break'">
             <img
@@ -48,18 +48,54 @@
             v-if="!timing"
             class="timer-action bg-white w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg"
             @click="startTimerAction">
-            بریم
+            <div class="flex justify-center items-center">
+              <span class="mx-1">بریم</span>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20 10.0001V14.0001H11L14.5 17.5001L12.08 19.9201L4.15997 12.0001L12.08 4.08008L14.5 6.50008L11 10.0001H20Z"
+                  fill="currentColor" />
+              </svg>
+            </div>
           </button>
           <template v-else>
             <button
               class="timer-action bg-white w-[150px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg ml-2.5"
               @click="restTimer">
-              دوباره
+              <div class="flex justify-center items-center">
+                <span class="mx-1">دوباره</span>
+                <svg
+                  width="26"
+                  height="26"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M19 8L15 12H18C18 13.5913 17.3679 15.1174 16.2426 16.2426C15.1174 17.3679 13.5913 18 12 18C11 18 10.03 17.75 9.2 17.3L7.74 18.76C8.97 19.54 10.43 20 12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12H23L19 8ZM6 12C6 10.4087 6.63214 8.88258 7.75736 7.75736C8.88258 6.63214 10.4087 6 12 6C13 6 13.97 6.25 14.8 6.7L16.26 5.24C15.03 4.46 13.57 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12H1L5 16L9 12"
+                    fill="currentColor" />
+                </svg>
+              </div>
             </button>
             <button
               class="timer-action bg-white w-[150px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg mr-2.5"
               @click="stopTimer">
-              مکث
+              <div class="flex justify-center items-center">
+                <span class="mx-1">مکث</span>
+                <svg
+                  width="26"
+                  height="26"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M14 19H18V5H14V19ZM6 19H10V5H6V19Z"
+                    fill="currentColor" />
+                </svg>
+              </div>
             </button>
           </template>
         </div>
@@ -73,9 +109,12 @@
             placeholder="یه اسم برای کار جدید بنویس..."
             @keypress.enter="createTaskAction" />
           <button
-            class="bg-glass py-2 px-4 m-3 rounded-lg text-white outline-none"
+            class="bg-glass py-2 px-5 m-3 rounded-lg text-white outline-none"
             @click="createTaskAction">
-            ساختن
+            <div class="flex justify-center items-center">
+              <span class="mx-1">ساختن</span>
+              <img class="w-[22px]" src="@/assets/icons/feather.svg" alt="" />
+            </div>
           </button>
         </div>
         <template v-for="t in tasks" :key="t.id">
@@ -124,8 +163,22 @@
               <button
                 class="bg-glass py-1 px-3 rounded-lg text-white outline-none ml-1"
                 @click="selectTaskAction(t.id)">
-                <span v-if="t.selected">انتخاب‌شده</span>
-                <span v-else>انتخاب</span>
+                <div class="flex justify-center items-center">
+                  <template v-if="t.selected">
+                    <span class="mx-1">انتخاب‌شده</span>
+                    <img
+                      class="w-[22px]"
+                      src="@/assets/icons/rocket-sharp.svg"
+                      alt="rocket" />
+                  </template>
+                  <template v-else>
+                    <span class="mx-1">انتخاب</span>
+                    <img
+                      class="w-[22px]"
+                      src="@/assets/icons/rocket-outline.svg"
+                      alt="rocket" />
+                  </template>
+                </div>
               </button>
               <div
                 class="edit bg-glass p-2 mx-1 rounded-lg cursor-pointer"
@@ -230,5 +283,9 @@ input::placeholder {
 .delete:active,
 .edit:active {
   transform: scale(0.9);
+}
+
+svg {
+  color: var(--status-color);
 }
 </style>
