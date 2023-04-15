@@ -2,7 +2,9 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open('cache-pomodoro.ir-v1-pwa')
             .then(cache => {
-                return cache.addAll(self.__WB_MANIFEST.map(({ url }) => url))
+                return cache.addAll([
+                    '/',
+                ])
             })
             .then(() => self.skipWaiting()),
     )
