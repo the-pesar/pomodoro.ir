@@ -1,5 +1,5 @@
 {
-  "private": false,
+  "repository": "https://github.com/the-pesar/pomodoro.ir",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

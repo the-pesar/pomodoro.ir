@@ -1,6 +1,9 @@
-import { v4 as uuidv4 } from "uuid"
+import { v4 as uuidv4 } from 'uuid'
 
 const tasks = ref<ITask[]>([])
+const selectedTask = computed<ITask | undefined>(() => {
+  return tasks.value.find((v) => v.selected)
+})
 
 function createTask(name: string) {
   const task: ITask = {
@@ -12,28 +15,26 @@ function createTask(name: string) {
     longBreak: 0,
   }
   tasks.value.push(task)
-  localStorage.setItem("tasks", JSON.stringify(tasks.value))
+  localStorage.setItem('tasks', JSON.stringify(tasks.value))
   return task
 }
 
-function deleteTask(id: string) {
+function deleteTask(id: string): ITask[] {
   const i = tasks.value.findIndex((v) => v.id === id)
   const task = tasks.value.splice(i, 1)
-  localStorage.setItem("tasks", JSON.stringify(tasks.value))
+  localStorage.setItem('tasks', JSON.stringify(tasks.value))
   return task
 }
 
-function selectTask(id: string): ITask | null {
-  let selectedTask: ITask | null = null
+function selectTask(id: string): ITask | undefined {
   tasks.value = tasks.value.map((task) => {
     if (task.id === id) {
       task.selected = true
-      selectedTask = task
     } else task.selected = false
     return task
   })
-  localStorage.setItem("tasks", JSON.stringify(tasks.value))
-  return selectedTask
+  localStorage.setItem('tasks', JSON.stringify(tasks.value))
+  return selectedTask.value
 }
 
 function editTask(id: string, newName: string): ITask {
@@ -42,26 +43,31 @@ function editTask(id: string, newName: string): ITask {
 
   const i = tasks.value.findIndex((task) => task.id === id)
   tasks.value[i].name = newName
-  localStorage.setItem("tasks", JSON.stringify(tasks.value))
+  localStorage.setItem('tasks', JSON.stringify(tasks.value))
   return tasks.value[i]
 }
 
-function updateTask(
-  id: string,
-  property: ITaskTime
-): ITask {
+function updateTask(id: string, property: ITaskTime): ITask {
   const i = tasks.value.findIndex((task) => task.id === id)
   tasks.value[i][property]++
-  localStorage.setItem("tasks", JSON.stringify(tasks.value))
+  localStorage.setItem('tasks', JSON.stringify(tasks.value))
   return tasks.value[i]
 }
 
 try {
-  tasks.value = JSON.parse(localStorage.getItem("tasks") ?? "[]")
+  tasks.value = JSON.parse(localStorage.getItem('tasks') ?? '[]')
 } catch {
   tasks.value = []
 }
 
 export function useTasks() {
-  return { tasks, createTask, deleteTask, selectTask, editTask, updateTask }
+  return {
+    tasks,
+    createTask,
+    deleteTask,
+    selectTask,
+    editTask,
+    updateTask,
+    selectedTask,
+  }
 }
