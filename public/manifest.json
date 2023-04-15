@@ -1,8 +1,8 @@
 {
     "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-    "name": "app name",
-    "short_name": "app short name",
-    "description": "A simple app that does things.",
+    "name": "Pomodoro web application",
+    "short_name": "Pomodoro",
+    "description": "A streamlined web-based timer for implementing the Pomodoro technique .",
     "icons": [
         {
             "src": "/pwa-48x48.png",
@@ -127,32 +127,116 @@
     ],
     "screenshots": [
         {
-            "src": "/pwa-screenshot-800x484.png",
-            "sizes": "800x484",
+            "src": "/pwa-screenshot-1136x640-focus.png",
+            "sizes": "1136x640",
             "type": "image/png",
-            "purpose": "any maskable monochrome",
+            "purpose": "any",
             "platform": "wide",
             "form_factor": "wide",
-            "label": "With Software, you can select a part of your screen and take a screenshot in seconds."
+            "label": "focus"
+        },
+        {
+            "src": "/pwa-screenshot-1136x640-focus.png",
+            "sizes": "1136x640",
+            "type": "image/png",
+            "purpose": "maskable",
+            "platform": "wide",
+            "form_factor": "wide",
+            "label": "focus"
+        },
+        {
+            "src": "/pwa-screenshot-1136x640-focus.png",
+            "sizes": "1136x640",
+            "type": "image/png",
+            "purpose": "monochrome",
+            "platform": "wide",
+            "form_factor": "wide",
+            "label": "focus"
+        },
+        {
+            "src": "/pwa-screenshot-1136x640-short-break.png",
+            "sizes": "1136x640",
+            "type": "image/png",
+            "purpose": "any",
+            "platform": "wide",
+            "form_factor": "wide",
+            "label": "focus"
+        },
+        {
+            "src": "/pwa-screenshot-1136x640-short-break.png",
+            "sizes": "1136x640",
+            "type": "image/png",
+            "purpose": "maskable",
+            "platform": "wide",
+            "form_factor": "wide",
+            "label": "focus"
+        },
+        {
+            "src": "/pwa-screenshot-1136x640-short-break.png",
+            "sizes": "1136x640",
+            "type": "image/png",
+            "purpose": "monochrome",
+            "platform": "wide",
+            "form_factor": "wide",
+            "label": "focus"
+        },
+        {
+            "src": "/pwa-screenshot-1136x640-long-break.png",
+            "sizes": "1136x640",
+            "type": "image/png",
+            "purpose": "any",
+            "platform": "wide",
+            "form_factor": "wide",
+            "label": "focus"
+        },
+        {
+            "src": "/pwa-screenshot-1136x640-long-break.png",
+            "sizes": "1136x640",
+            "type": "image/png",
+            "purpose": "maskable",
+            "platform": "wide",
+            "form_factor": "wide",
+            "label": "focus"
+        },
+        {
+            "src": "/pwa-screenshot-1136x640-long-break.png",
+            "sizes": "1136x640",
+            "type": "image/png",
+            "purpose": "monochrome",
+            "platform": "wide",
+            "form_factor": "wide",
+            "label": "focus"
         }
     ],
     "shortcuts": [
         {
-            "name": "example name",
-            "short_name": "example short name",
-            "description": "example description",
-            "url": "",
+            "name": "Pomodoro web application",
+            "short_name": "Pomodoro",
+            "description": "Pomodoro web app with a streamlined timer .",
+            "url": "/",
             "icons": [
                 {
-                    "src": "",
+                    "src": "/pwa-96x96.png",
                     "sizes": "96x96",
                     "type": "image/png",
-                    "purpose": "any maskable monochrome"
+                    "purpose": "any"
+                },
+                {
+                    "src": "/pwa-96x96.png",
+                    "sizes": "96x96",
+                    "type": "image/png",
+                    "purpose": "maskable"
+                },
+                {
+                    "src": "/pwa-96x96.png",
+                    "sizes": "96x96",
+                    "type": "image/png",
+                    "purpose": "monochrome"
                 }
             ]
         }
     ],
-    "iarc_rating_id": "99999999999999",
+    "iarc_rating_id": "99999999999999 'To get one, you need to register for an IARC account and submit your product for rating' ",
     "start_url": "/",
     "scope": "/",
     "id": "/",
@@ -173,35 +257,46 @@
         {
             "platform": "play",
             "url": "https://play.google.com/store/apps/details?id=cheeaun.hackerweb"
+        },
+        {
+            "platform": "itunes",
+            "url": "https://itunes.apple.com/us/app/myapp/id1234567890?ls=1&mt=8"
         }
     ],
     "protocol_handlers": [
         {
             "protocol": "web+music",
-            "url": "/play?track=%s"
+            "name": "MyApp",
+            "url": "/"
         }
     ],
     "categories": [
-        "games",
-        "finance",
-        "navigation"
+        "productivity"
     ],
     "dir": "rtl",
     "lang": "fa",
-    "author": "author",
-    "version": "3.0.0",
-    "manifest_version": 3,
+    "author": "the-pesar [https://github.com/the-pesar]",
+    "version": "4.0.0",
+    "manifest_version": 4,
     "incognito": "not_allowed",
     "launch_handler": {
         "client_mode": "navigate-new"
     },
     "share_target": {
-        "action": "/shared-content-receiver/",
-        "method": "GET",
+        "action": "share",
+        "method": "POST",
+        "enctype": "multipart/form-data",
         "params": {
-            "title": "name",
-            "text": "description",
-            "url": "link"
+            "title": "Pomodoro",
+            "text": "Pomodoro web app with a streamlined timer .",
+            "url": "/",
+            "files": {
+                "name": "file",
+                "accept": [
+                    "image/*",
+                    "video/*"
+                ]
+            }
         }
     }
 }
