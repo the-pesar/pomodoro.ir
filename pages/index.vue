@@ -1,7 +1,8 @@
 <template>
-  <Notif />
-  <Pmdr />
-  <Ad />
+  <h1 class="bg-yellow-400 py-2 text-center">خیلی بیشتر از این حرفا دوست دارم بهار :)</h1>
+  <!-- <Notif /> -->
+  <!-- <Pmdr /> -->
+  <!-- <Ad /> -->
   <!-- <Desc /> temporary -->
   <!-- <Footer /> temporary -->
 </template>
