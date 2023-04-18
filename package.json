@@ -12,7 +12,7 @@
     "@nuxtjs/tailwindcss": "^6.6.4",
     "@types/node": "^18.15.11",
     "@types/uuid": "^9.0.1",
-    "nuxt": "^3.2.3",
+    "nuxt": "^3.4.1",
     "prettier": "^2.8.6"
   },
   "dependencies": {
