@@ -22,7 +22,6 @@ const timer = computed<string>(() => {
 function startTimer() {
   function timerInterval() {
     if (!counting.value) return
-    console.log(counting.value)
     time.value--
     useHead({ title: `${timer.value} - ${status.value?.text}` })
     if (time.value === 0) {

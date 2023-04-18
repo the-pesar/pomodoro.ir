@@ -48,8 +48,6 @@ function nextStatus() {
   switch (status.value?.name) {
     case 'focus':
       updateTask(tasks.value[i].id, 'focus')
-      // TODO -> remove console.log
-      console.log(tasks.value[i].focus % 4)
       if (tasks.value[i].focus % 4 === 0) {
         setStatus('long-break')
       } else {

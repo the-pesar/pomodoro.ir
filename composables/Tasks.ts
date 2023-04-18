@@ -38,9 +38,6 @@ function selectTask(id: string): ITask | undefined {
 }
 
 function editTask(id: string, newName: string): ITask {
-  // TODO -> remove console.log
-  console.log(newName)
-
   const i = tasks.value.findIndex((task) => task.id === id)
   tasks.value[i].name = newName
   localStorage.setItem('tasks', JSON.stringify(tasks.value))
