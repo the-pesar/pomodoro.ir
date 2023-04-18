@@ -7,7 +7,7 @@ const alertSound: HTMLAudioElement | null = ((isClient) =>
 
 const time = ref<number>(status.value?.time ?? 0)
 
-const timeInterval = ref<number | NodeJS.Timer>(0)
+const counting = ref<boolean>(false)
 
 const timer = computed<string>(() => {
   let m: number | string = Math.trunc(time.value / 60)
@@ -20,7 +20,9 @@ const timer = computed<string>(() => {
 })
 
 function startTimer() {
-  timeInterval.value = setInterval(() => {
+  function timerInterval() {
+    if (!counting.value) return
+    console.log(counting.value)
     time.value--
     useHead({ title: `${timer.value} - ${status.value?.text}` })
     if (time.value === 0) {
@@ -30,12 +32,14 @@ function startTimer() {
       time.value = status.value?.time as number
       startTimer()
     }
-  }, 1000)
+    setTimeout(timerInterval, 1000)
+  }
+  counting.value = true
+  setTimeout(timerInterval, 1000)
 }
 
 function stopTimer() {
-  clearInterval(timeInterval.value)
-  timeInterval.value = 0
+  counting.value = false
 }
 
 function restTimer() {
@@ -44,7 +48,7 @@ function restTimer() {
   useHead({ title: 'پومودورو' })
 }
 
-const timing = computed<boolean>(() => !!timeInterval.value)
+const timing = computed<boolean>(() => !!counting.value)
 
 export function useTimer() {
   return {
