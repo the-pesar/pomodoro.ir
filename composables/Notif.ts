@@ -1,12 +1,12 @@
-const show = ref(false)
-const text = ref('')
-let timeout: number = 0
+const show = ref<boolean>(false)
+const text = ref<string>('')
+const timeout = ref<NodeJS.Timeout>()
 export function useNotif() {
   function error(errorText: string) {
-    timeout && clearTimeout(timeout)
+    timeout.value && clearTimeout(timeout.value)
     text.value = errorText
     show.value = true
-    timeout = setTimeout(() => {
+    timeout.value = setTimeout(() => {
       show.value = false
     }, 5000)
   }

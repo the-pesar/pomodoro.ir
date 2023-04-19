@@ -35,12 +35,11 @@ function setStatus(newStatus: TimeLength) {
     v.active = v.name === newStatus
     return v
   })
-  if (process.client) document.body.setAttribute('status', newStatus)
-  if (process.client) {
+  process.client && document.body.setAttribute('status', newStatus)
+  process.client &&
     document.head
       .querySelector("meta[name='theme-color']")
       ?.setAttribute('content', status.value?.color as string)
-  }
 }
 
 function nextStatus() {
