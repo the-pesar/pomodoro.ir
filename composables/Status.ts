@@ -1,6 +1,6 @@
 import { useTasks } from '~/composables/Tasks'
 
-const { tasks, updateTask } = useTasks()
+const { tasks, updateTask, selectedTask } = useTasks()
 
 const statuses = ref<IStatus[]>([
   {
@@ -43,22 +43,22 @@ function setStatus(newStatus: TimeLength) {
 }
 
 function nextStatus() {
-  const i = tasks.value.findIndex((v) => v.selected)
+  if (!selectedTask.value) return
   switch (status.value?.name) {
     case 'focus':
-      updateTask(tasks.value[i].id, 'focus')
-      if (tasks.value[i].focus % 4 === 0) {
+      updateTask(selectedTask.value.id, 'focus')
+      if (selectedTask.value.focus % 4 === 0) {
         setStatus('long-break')
       } else {
         setStatus('short-break')
       }
       break
     case 'short-break':
-      updateTask(tasks.value[i].id, 'shortBreak')
+      updateTask(selectedTask.value.id, 'shortBreak')
       setStatus('focus')
       break
     case 'long-break':
-      updateTask(tasks.value[i].id, 'longBreak')
+      updateTask(selectedTask.value.id, 'longBreak')
       setStatus('focus')
       break
     default:

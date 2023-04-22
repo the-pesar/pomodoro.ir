@@ -42,7 +42,7 @@
       </section>
       <section
         class="flex flex-col bg-glass mt-2.5 pt-10 rounded-lg font-['clockicons'] text-white text-center">
-        <span class="text-[130px] md:text-[150px]">{{ timer }}</span>
+        <span class="text-[130px] md:text-[150px]">{{ countdownTimer }}</span>
         <div class="py-10">
           <button
             v-if="!timing"
@@ -216,7 +216,8 @@ const { error } = useNotif()
 const vFocus = {
   mounted: (el: HTMLInputElement) => el.focus(),
 }
-const { time, timer, startTimer, stopTimer, restTimer, timing } = useTimer()
+const { time, countdownTimer, startTimer, stopTimer, restTimer, timing } =
+  useTimer()
 const { status, setStatus } = useStatus()
 const { tasks, createTask, deleteTask, selectTask, editTask, selectedTask } =
   useTasks()
@@ -231,7 +232,6 @@ const activeTab = computed({
   set: (newTab: TimeLength) => {
     setStatus(newTab)
     restTimer()
-    time.value = status.value?.time as number
   },
 })
 

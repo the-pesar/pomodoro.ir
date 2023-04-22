@@ -5,11 +5,21 @@ const { status, nextStatus } = useStatus()
 const alertSound: HTMLAudioElement | null = ((isClient) =>
   isClient ? new Audio('/sounds/alarm-bell.mp3') : null)(process.client)
 
-const time = ref<number>(status.value?.time ?? 0)
+const timeSequence = ref<ITime[]>([])
+const timeInterval = ref<NodeJS.Timer | number>(0)
 
-const counting = ref<boolean>(false)
-
-const timer = computed<string>(() => {
+const time = computed(
+  () =>
+    status.value.time -
+    Math.trunc(
+      timeSequence.value.reduce(
+        (currentValue, currentIndex) =>
+          currentIndex.end - currentIndex.start + currentValue,
+        0
+      ) / 1000
+    )
+)
+const countdownTimer = computed<string>(() => {
   let m: number | string = Math.trunc(time.value / 60)
   let s: number | string = time.value % 60
 
@@ -20,42 +30,41 @@ const timer = computed<string>(() => {
 })
 
 function startTimer() {
-  function timerInterval() {
-    if (!counting.value) return
-    time.value--
-    useHead({ title: `${timer.value} - ${status.value?.text}` })
-    if (time.value === 0) {
+  const start = new Date().getTime()
+  timeSequence.value.push({ start, end: start })
+  timeInterval.value = setInterval(() => {
+    timeSequence.value[timeSequence.value.length - 1].end = new Date().getTime()
+    useHead({ title: `${countdownTimer.value} - ${status.value?.text}` })
+    if (time.value <= 0) {
       alertSound?.play()
-      stopTimer()
+      restTimer()
       nextStatus()
-      time.value = status.value?.time as number
       startTimer()
     }
-    setTimeout(timerInterval, 1000)
-  }
-  counting.value = true
-  setTimeout(timerInterval, 1000)
+  }, 1000)
 }
 
 function stopTimer() {
-  counting.value = false
+  clearInterval(timeInterval.value)
+  timeInterval.value = 0
 }
 
 function restTimer() {
   stopTimer()
-  time.value = status.value?.time ?? 0
+  timeSequence.value = []
   useHead({ title: 'پومودورو' })
 }
 
-const timing = computed<boolean>(() => !!counting.value)
+const timing = computed<boolean>(() => !!timeInterval.value)
 
 export function useTimer() {
   return {
     time,
-    timer,
+    countdownTimer,
     startTimer,
     stopTimer,
     restTimer,
     timing,
+    timeSequence,
   }
 }
