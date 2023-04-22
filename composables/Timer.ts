@@ -6,7 +6,7 @@ const alertSound: HTMLAudioElement | null = ((isClient) =>
   isClient ? new Audio('/sounds/alarm-bell.mp3') : null)(process.client)
 
 const timeSequence = ref<ITime[]>([])
-const timeInterval = ref<NodeJS.Timer | number>(0)
+const timing = ref<boolean>(false)
 
 const time = computed(
   () =>
@@ -30,23 +30,26 @@ const countdownTimer = computed<string>(() => {
 })
 
 function startTimer() {
+  timing.value = true
+  useHead({ title: `${status.value?.text}` })
   const start = new Date().getTime()
   timeSequence.value.push({ start, end: start })
-  timeInterval.value = setInterval(() => {
+  function timerInterval() {
+    if (!timing.value) return
     timeSequence.value[timeSequence.value.length - 1].end = new Date().getTime()
-    useHead({ title: `${countdownTimer.value} - ${status.value?.text}` })
     if (time.value <= 0) {
       alertSound?.play()
       restTimer()
       nextStatus()
       startTimer()
     }
-  }, 1000)
+    setTimeout(timerInterval, 1000)
+  }
+  timerInterval()
 }
 
 function stopTimer() {
-  clearInterval(timeInterval.value)
-  timeInterval.value = 0
+  timing.value = false
 }
 
 function restTimer() {
@@ -54,8 +57,6 @@ function restTimer() {
   timeSequence.value = []
   useHead({ title: 'پومودورو' })
 }
-
-const timing = computed<boolean>(() => !!timeInterval.value)
 
 export function useTimer() {
   return {
