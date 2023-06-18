@@ -11,7 +11,7 @@ interface IStatus {
   name: TimeLength
   text: string
   time: number
-  color: '#ba4949' | '#61764b' | '#2f5d62'
+  color: Color
   active: boolean
 }
 
