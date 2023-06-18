@@ -1,3 +1,7 @@
+//TODO-> remove console.time()
+
+console.time();
+
 import { v4 as uuidv4 } from 'uuid'
 
 const tasks = ref<ITask[]>([])
@@ -14,49 +18,40 @@ function createTask(name: string) {
     shortBreak: 0,
     longBreak: 0,
   }
-  tasks.value.push(task)
+  tasks.value = [...tasks.value, task]
   localStorage.setItem('tasks', JSON.stringify(tasks.value))
   return task
 }
-
-function deleteTask(id: string): ITask[] {
-  const i = tasks.value.findIndex((v) => v.id === id)
-  const task = tasks.value.splice(i, 1)
-  localStorage.setItem('tasks', JSON.stringify(tasks.value))
-  return task
+function deleteTask(id: string): ITask[] | undefined {
+  const i = tasks.value.findIndex((task) => task.id === id)
+  if (i !== -1) {
+    const task = tasks.value.splice(i, 1)
+    localStorage.setItem('tasks', JSON.stringify(tasks.value))
+    return task
+  }
+  return undefined
 }
-
 function selectTask(id: string): ITask | undefined {
   tasks.value = tasks.value.map((task) => {
-    if (task.id === id) {
-      task.selected = true
-    } else task.selected = false
+    task.id === id ? task.selected = true : task.selected = false
     return task
   })
   localStorage.setItem('tasks', JSON.stringify(tasks.value))
   return selectedTask.value
 }
-
-function editTask(id: string, newName: string): ITask {
+function editTask(id: string, newName: string): ITask | undefined {
   const i = tasks.value.findIndex((task) => task.id === id)
-  tasks.value[i].name = newName
-  localStorage.setItem('tasks', JSON.stringify(tasks.value))
-  return tasks.value[i]
+  return i !== -1 ? ((tasks.value[i] = { ...tasks.value[i], name: newName }), localStorage.setItem('tasks', JSON.stringify(tasks.value)), tasks.value[i]) : undefined;
 }
-
-function updateTask(id: string, property: ITaskTime): ITask {
+function updateTask(id: string, property: ITaskTime): ITask | undefined {
   const i = tasks.value.findIndex((task) => task.id === id)
-  tasks.value[i][property]++
-  localStorage.setItem('tasks', JSON.stringify(tasks.value))
-  return tasks.value[i]
+  return i !== -1 ? ((tasks.value[i][property]++, localStorage.setItem('tasks', JSON.stringify(tasks.value)), tasks.value[i])) : undefined;
 }
-
 try {
   tasks.value = JSON.parse(localStorage.getItem('tasks') ?? '[]')
 } catch {
   tasks.value = []
 }
-
 export function useTasks() {
   return {
     tasks,
@@ -68,3 +63,6 @@ export function useTasks() {
     selectedTask,
   }
 }
+
+//TODO-> remove console.timeEnd()
+console.timeEnd()
