@@ -106,6 +106,7 @@
             v-model="newTask"
             class="bg-transparent outline-none h-[64px] w-full rounded-lg px-3 text-white border-r-8"
             type="text"
+            ref="newTaskInput"
             placeholder="یه اسم برای کار جدید بنویس..."
             @keypress.enter="createTaskAction" />
           <button
@@ -213,9 +214,14 @@ import { useNotif } from '~/composables/Notif'
 
 const { error } = useNotif()
 
+const route = useRoute()
+
 const vFocus = {
   mounted: (el: HTMLInputElement) => el.focus(),
 }
+
+const newTaskInput = ref<HTMLInputElement>()
+
 const { time, countdownTimer, startTimer, stopTimer, restTimer, timing } =
   useTimer()
 const { status, setStatus } = useStatus()
@@ -264,6 +270,11 @@ const selectTaskAction = (id: string) => {
   selectTask(id)
   restTimer()
 }
+
+onMounted(() => {
+  newTask.value = route.query['new-task'] as string
+  newTaskInput.value?.focus()
+})
 </script>
 
 <style>
