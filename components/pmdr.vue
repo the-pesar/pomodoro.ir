@@ -216,10 +216,6 @@ const { error } = useNotif()
 
 const route = useRoute()
 
-const vFocus = {
-  mounted: (el: HTMLInputElement) => el.focus(),
-}
-
 const newTaskInput = ref<HTMLInputElement>()
 
 const { time, countdownTimer, startTimer, stopTimer, restTimer, timing } =
