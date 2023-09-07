@@ -1,6 +1,6 @@
 <template>
-  <Notif />
   <Pmdr />
+  <Notif />
   <Ad />
   <!-- <Desc /> temporary -->
   <!-- <Footer /> temporary -->
