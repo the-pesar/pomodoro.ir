@@ -1,5 +1,6 @@
 <template>
   <main class="pmdr w-full min-h-screen">
+    <Navbar />
     <div
       class="mx-auto w-12/12 md:w-10/12 lg:w-7/12 xl:w-6/12 2xl:w-4/12 py-5 px-3 md:px-10">
       <SelectedTask />
