@@ -151,37 +151,25 @@
           </div>
           <div
             v-else
-            class="expand-animation bg-glass flex flex-col items-center md:justify-between md:flex-row rounded-lg border-r-8 text-white p-4 mt-4">
-            <div class="flex items-center">
-              <div
-                class="bg-glass px-3 pt-1 rounded-lg text-lg hidden md:block"
-                v-text="t.focus"></div>
+            class="expand-animation bg-glass flex flex-col items-center md:justify-between md:flex-row rounded-lg border-r-8 text-white p-4 mt-4 cursor-pointer"
+            @click.self="selectTask(t.id)">
+            <div class="flex items-center" @click="selectTask(t.id)">
+              <img
+                v-if="t.selected"
+                class="w-[32px]"
+                src="@/assets/icons/checkmark-circle.svg"
+                alt="rocket" />
+              <img
+                v-else
+                class="w-[32px]"
+                src="@/assets/icons/radio-button-off-outline.svg"
+                alt="rocket" />
               <span class="mx-3" v-text="t.name"></span>
             </div>
             <div class="flex mt-4 md:mt-0">
               <div
                 class="bg-glass px-3 pt-1 ml-2 rounded-lg text-lg md:hidden"
                 v-text="t.focus"></div>
-              <button
-                class="bg-glass py-1 px-3 rounded-lg text-white outline-none ml-1"
-                @click="selectTaskAction(t.id)">
-                <div class="flex justify-center items-center">
-                  <template v-if="t.selected">
-                    <span class="mx-1">انتخاب‌شده</span>
-                    <img
-                      class="w-[22px]"
-                      src="@/assets/icons/rocket-sharp.svg"
-                      alt="rocket" />
-                  </template>
-                  <template v-else>
-                    <span class="mx-1">انتخاب</span>
-                    <img
-                      class="w-[22px]"
-                      src="@/assets/icons/rocket-outline.svg"
-                      alt="rocket" />
-                  </template>
-                </div>
-              </button>
               <div
                 class="edit bg-glass p-2 mx-1 rounded-lg cursor-pointer"
                 @click="editingTasks.push(t.id)">
@@ -190,6 +178,13 @@
                   src="@/assets/icons/edit.svg"
                   width="18"
                   alt="Edit" />
+              </div>
+              <div class="delete bg-glass p-2 mx-1 rounded-lg cursor-pointer">
+                <img
+                  class="cursor-pointer"
+                  src="@/assets/icons/bookmark-fill.svg"
+                  width="18"
+                  alt="Delete" />
               </div>
               <div
                 class="delete bg-glass p-2 mr-1 rounded-lg cursor-pointer"
