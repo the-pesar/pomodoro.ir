@@ -1,13 +1,7 @@
-//TODO-> remove console.time()
-
-console.time();
-
 import { v4 as uuidv4 } from 'uuid'
 
 const tasks = ref<ITask[]>([])
-const selectedTask = computed<ITask | undefined>(() => {
-  return tasks.value.find((v) => v.selected)
-})
+const selectedTask = computed(() => tasks.value.find((v) => v.selected))
 
 function createTask(name: string) {
   const task: ITask = {
@@ -33,7 +27,7 @@ function deleteTask(id: string): ITask[] | undefined {
 }
 function selectTask(id: string): ITask | undefined {
   tasks.value = tasks.value.map((task) => {
-    task.id === id ? task.selected = true : task.selected = false
+    task.id === id ? (task.selected = true) : (task.selected = false)
     return task
   })
   localStorage.setItem('tasks', JSON.stringify(tasks.value))
@@ -41,17 +35,27 @@ function selectTask(id: string): ITask | undefined {
 }
 function editTask(id: string, newName: string): ITask | undefined {
   const i = tasks.value.findIndex((task) => task.id === id)
-  return i !== -1 ? ((tasks.value[i] = { ...tasks.value[i], name: newName }), localStorage.setItem('tasks', JSON.stringify(tasks.value)), tasks.value[i]) : undefined;
+  return i !== -1
+    ? ((tasks.value[i] = { ...tasks.value[i], name: newName }),
+      localStorage.setItem('tasks', JSON.stringify(tasks.value)),
+      tasks.value[i])
+    : undefined
 }
 function updateTask(id: string, property: ITaskTime): ITask | undefined {
   const i = tasks.value.findIndex((task) => task.id === id)
-  return i !== -1 ? ((tasks.value[i][property]++, localStorage.setItem('tasks', JSON.stringify(tasks.value)), tasks.value[i])) : undefined;
+  return i !== -1
+    ? (tasks.value[i][property]++,
+      localStorage.setItem('tasks', JSON.stringify(tasks.value)),
+      tasks.value[i])
+    : undefined
 }
+
 try {
   tasks.value = JSON.parse(localStorage.getItem('tasks') ?? '[]')
 } catch {
   tasks.value = []
 }
+
 export function useTasks() {
   return {
     tasks,
@@ -63,6 +67,3 @@ export function useTasks() {
     selectedTask,
   }
 }
-
-//TODO-> remove console.timeEnd()
-console.timeEnd()
