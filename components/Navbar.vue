@@ -12,7 +12,7 @@
         <span class="text-white mx-2 hidden md:inline">تاریخچه</span>
       </GlassButton>
       <GlassButton class="p-3 mr-3" disabled>
-        <img src="@/assets/icons/cloud.svg" alt="cloud" />
+        <img src="@/assets/icons/people-fill.svg" alt="cloud" />
         <span class="text-white mx-2 hidden md:inline">لیست کاربران</span>
       </GlassButton>
     </div>

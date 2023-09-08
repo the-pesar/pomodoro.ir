@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/tailwindcss', '@nuxt/devtools'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/devtools', '@pinia/nuxt'],
   css: ['~/assets/styles/main.css'],
   plugins: [
     { src: '~/plugins/vercel.ts', mode: 'client' },
@@ -7,5 +7,12 @@ export default defineNuxtConfig({
   ],
   devtools: {
     enabled: true,
+  },
+  pinia: {
+    autoImports: [
+      'defineStore',
+      'storeToRefs',
+      ['defineStore', 'definePiniaStore'],
+    ],
   },
 })

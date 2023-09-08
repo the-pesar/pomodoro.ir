@@ -48,7 +48,7 @@
           <button
             v-if="!timing"
             class="timer-action bg-white w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg"
-            @click="startTimerAction">
+            @click="timerStore.startTimer">
             <div class="flex justify-center items-center">
               <span class="mx-1">بریم</span>
               <svg
@@ -66,7 +66,7 @@
           <template v-else>
             <button
               class="timer-action bg-white w-[150px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg ml-2.5"
-              @click="restTimer">
+              @click="timerStore.rest">
               <div class="flex justify-center items-center">
                 <span class="mx-1">دوباره</span>
                 <svg
@@ -83,7 +83,7 @@
             </button>
             <button
               class="timer-action bg-white w-[150px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg mr-2.5"
-              @click="stopTimer">
+              @click="timerStore.stopTimer">
               <div class="flex justify-center items-center">
                 <span class="mx-1">مکث</span>
                 <svg
@@ -120,147 +120,44 @@
           </button>
         </div>
         <template v-for="t in tasks" :key="t.id">
-          <div
-            v-if="editingTasks.some((v) => v === t.id)"
-            class="bg-glass flex justify-between rounded-lg border-r-8 text-white mt-4">
-            <input
-              v-model="t.name"
-              class="bg-transparent outline-none h-[64px] w-full rounded-lg px-4 text-white"
-              type="text"
-              @keypress.enter="editTaskAction(t.id, t.name)"
-              v-focus />
-            <button
-              class="dit bg-glass p-1 my-4 mx-2 rounded-lg cursor-pointer"
-              @click="
-                editingTasks.splice(
-                  editingTasks.findIndex((v) => v === t.id),
-                  1
-                )
-              ">
-              <img
-                class="cursor-pointer"
-                src="@/assets/icons/close.svg"
-                width="35"
-                alt="Close" />
-            </button>
-            <button
-              class="bg-glass py-1 px-3 rounded-lg text-white outline-none my-4 ml-4"
-              @click="editTaskAction(t.id, t.name)">
-              ویرایش
-            </button>
-          </div>
-          <div
-            v-else
-            class="expand-animation bg-glass flex flex-col items-center md:justify-between md:flex-row rounded-lg border-r-8 text-white p-4 mt-4 cursor-pointer"
-            @click.self="selectTask(t.id)">
-            <div class="flex items-center" @click="selectTask(t.id)">
-              <img
-                v-if="t.selected"
-                class="w-[32px]"
-                src="@/assets/icons/checkmark-circle.svg"
-                alt="rocket" />
-              <img
-                v-else
-                class="w-[32px]"
-                src="@/assets/icons/radio-button-off-outline.svg"
-                alt="rocket" />
-              <span class="mx-3" v-text="t.name"></span>
-            </div>
-            <div class="flex mt-4 md:mt-0">
-              <div
-                class="bg-glass px-3 pt-1 ml-2 rounded-lg text-lg md:hidden"
-                v-text="t.focus"></div>
-              <div
-                class="edit bg-glass p-2 mx-1 rounded-lg cursor-pointer"
-                @click="editingTasks.push(t.id)">
-                <img
-                  class="cursor-pointer"
-                  src="@/assets/icons/edit.svg"
-                  width="18"
-                  alt="Edit" />
-              </div>
-              <div class="delete bg-glass p-2 mx-1 rounded-lg cursor-pointer">
-                <img
-                  class="cursor-pointer"
-                  src="@/assets/icons/bookmark-fill.svg"
-                  width="18"
-                  alt="Delete" />
-              </div>
-              <div
-                class="delete bg-glass p-2 mr-1 rounded-lg cursor-pointer"
-                @click="deleteTaskAction(t.id)">
-                <img
-                  class="cursor-pointer"
-                  src="@/assets/icons/trash-fill.svg"
-                  width="18"
-                  alt="Delete" />
-              </div>
-            </div>
-          </div>
+          <Task v-bind="t" />
         </template>
       </section>
     </div>
   </main>
 </template>
 <script lang="ts" setup>
-import { useTimer } from '~/composables/Timer'
-import { useStatus } from '~/composables/Status'
-import { useTasks } from '~/composables/Tasks'
-import { useNotif } from '~/composables/Notif'
-
-const { error } = useNotif()
+import { useTimerStore } from '~/stores/Timer'
+import { useTasksStore } from '~/stores/Tasks'
 
 const route = useRoute()
 
 const newTaskInput = ref<HTMLInputElement>()
 
-const { time, countdownTimer, startTimer, stopTimer, restTimer, timing } =
-  useTimer()
-const { status, setStatus } = useStatus()
-const { tasks, createTask, deleteTask, selectTask, editTask, selectedTask } =
-  useTasks()
+const timerStore = useTimerStore()
+const tasksStore = useTasksStore()
+
+const { countdownTimer, timing, status } = storeToRefs(timerStore)
+const { tasks } = storeToRefs(tasksStore)
+
+tasksStore.init()
 
 const newTask = ref<string>('')
-const editingTasks = ref<string[]>([])
 
 const activeTab = computed({
   get: () => {
     return status.value?.name as TimeLength
   },
   set: (newTab: TimeLength) => {
-    setStatus(newTab)
-    restTimer()
+    timerStore.setStatus(newTab)
+    timerStore.rest()
   },
 })
 
 const createTaskAction = () => {
   if (!newTask.value) return
-  createTask(newTask.value)
+  tasksStore.create(newTask.value)
   newTask.value = ''
-}
-
-const editTaskAction = (id: string, newName: string) => {
-  editTask(id, newName)
-  editingTasks.value.splice(
-    editingTasks.value.findIndex((v) => v === id),
-    1
-  )
-}
-
-const startTimerAction = () => {
-  if (tasks.value.find((v) => v.selected)) startTimer()
-  else error('اول از همه یه کار جدید بساز و انتخاب کن!')
-}
-
-const deleteTaskAction = (id: string) => {
-  deleteTask(id)
-  restTimer()
-}
-
-const selectTaskAction = (id: string) => {
-  if (selectedTask.value?.id === id) return
-  selectTask(id)
-  restTimer()
 }
 
 onMounted(() => {
