@@ -54,6 +54,13 @@ function deleteHandler() {
       <div
         class="bg-glass px-3 pt-1 ml-2 rounded-lg text-lg md:hidden"
         v-text="focus"></div>
+      <div class="delete bg-glass p-2 mx-1 rounded-lg cursor-pointer">
+        <img
+          class="cursor-pointer"
+          src="@/assets/icons/check-circle-fill.svg"
+          width="18"
+          alt="archive" />
+      </div>
       <div
         class="edit bg-glass p-2 mx-1 rounded-lg cursor-pointer"
         @click="() => (editmode = true) && (newName = name)">
@@ -62,13 +69,6 @@ function deleteHandler() {
           src="@/assets/icons/edit.svg"
           width="18"
           alt="edit" />
-      </div>
-      <div class="delete bg-glass p-2 mx-1 rounded-lg cursor-pointer">
-        <img
-          class="cursor-pointer"
-          src="@/assets/icons/bookmark-fill.svg"
-          width="18"
-          alt="archive" />
       </div>
       <div
         class="delete bg-glass p-2 mr-1 rounded-lg cursor-pointer"
