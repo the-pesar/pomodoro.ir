@@ -200,6 +200,7 @@
         </template>
       </section>
     </div>
+    <Advertise />
   </main>
 </template>
 <script lang="ts" setup>
