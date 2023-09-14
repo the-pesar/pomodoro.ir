@@ -18,7 +18,9 @@
     "prettier": "^2.8.6"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
     "@vercel/analytics": "^0.1.11",
+    "pinia": "^2.1.6",
     "uuid": "^9.0.0"
   }
 }

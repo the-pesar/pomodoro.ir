@@ -30,7 +30,7 @@ const randomBanner = computed(() => banners.value[3])
     class="sticky inline-block bottom-10 mt-36 mx-5 invisible xl:visible"
     target="_blank"
     :href="randomBanner.link">
-    <div class="flex items-center bg-glass fade-in-animation p-3 rounded-lg">
+    <div class="flex items-center bg-glass p-3 rounded-lg">
       <img
         :src="`/advertise-icons/${randomBanner.icon}`"
         width="35"

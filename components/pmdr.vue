@@ -43,7 +43,7 @@
       </section>
       <section
         class="flex flex-col bg-glass mt-2.5 pt-10 rounded-lg font-['clockicons'] text-white text-center">
-        <span class="text-[130px] md:text-[150px]">{{ countdownTimer }}</span>
+        <span class="text-[130px] md:text-[150px]">{{ timer }}</span>
         <div class="py-10">
           <button
             v-if="!timing"
@@ -66,7 +66,7 @@
           <template v-else>
             <button
               class="timer-action bg-white w-[150px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg ml-2.5"
-              @click="restTimer">
+              @click="timerStore.rest">
               <div class="flex justify-center items-center">
                 <span class="mx-1">دوباره</span>
                 <svg
@@ -83,7 +83,7 @@
             </button>
             <button
               class="timer-action bg-white w-[150px] md:w-[180px] h-[60px] text-xl font-['Vazirmatn'] rounded-lg mr-2.5"
-              @click="stopTimer">
+              @click="timerStore.stop">
               <div class="flex justify-center items-center">
                 <span class="mx-1">مکث</span>
                 <svg
@@ -152,8 +152,8 @@
           <div
             v-else
             class="expand-animation bg-glass flex flex-col items-center md:justify-between md:flex-row rounded-lg border-r-8 text-white p-4 mt-4 cursor-pointer"
-            @click.self="selectTask(t.id)">
-            <div class="flex items-center" @click="selectTask(t.id)">
+            @click.self="tasksStore.select(t.id)">
+            <div class="flex items-center" @click="tasksStore.select(t.id)">
               <img
                 v-if="t.selected"
                 class="w-[32px]"
@@ -204,22 +204,21 @@
   </main>
 </template>
 <script lang="ts" setup>
-import { useTimer } from '~/composables/Timer'
-import { useStatus } from '~/composables/Status'
-import { useTasks } from '~/composables/Tasks'
 import { useNotif } from '~/composables/Notif'
+import { useTasksStore } from '@/stores/Tasks'
+import { useTimerStore } from '@/stores/Timer'
+
+const tasksStore = useTasksStore()
+const timerStore = useTimerStore()
+
+const { tasks, selectedTask } = storeToRefs(tasksStore)
+const { time, timing, timer, status } = storeToRefs(timerStore)
 
 const { error } = useNotif()
 
 const route = useRoute()
 
 const newTaskInput = ref<HTMLInputElement>()
-
-const { time, countdownTimer, startTimer, stopTimer, restTimer, timing } =
-  useTimer()
-const { status, setStatus } = useStatus()
-const { tasks, createTask, deleteTask, selectTask, editTask, selectedTask } =
-  useTasks()
 
 const newTask = ref<string>('')
 const editingTasks = ref<string[]>([])
@@ -229,19 +228,19 @@ const activeTab = computed({
     return status.value?.name as TimeLength
   },
   set: (newTab: TimeLength) => {
-    setStatus(newTab)
-    restTimer()
+    timerStore.setStatus(newTab)
+    timerStore.rest()
   },
 })
 
 const createTaskAction = () => {
   if (!newTask.value) return
-  createTask(newTask.value)
+  tasksStore.create(newTask.value)
   newTask.value = ''
 }
 
 const editTaskAction = (id: string, newName: string) => {
-  editTask(id, newName)
+  tasksStore.edit(id, newName)
   editingTasks.value.splice(
     editingTasks.value.findIndex((v) => v === id),
     1
@@ -249,19 +248,19 @@ const editTaskAction = (id: string, newName: string) => {
 }
 
 const startTimerAction = () => {
-  if (tasks.value.find((v) => v.selected)) startTimer()
+  if (tasks.value.find((v) => v.selected)) timerStore.start()
   else error('اول از همه یه کار جدید بساز و انتخاب کن!')
 }
 
 const deleteTaskAction = (id: string) => {
-  deleteTask(id)
-  restTimer()
+  tasksStore.remove(id)
+  timerStore.rest()
 }
 
 const selectTaskAction = (id: string) => {
   if (selectedTask.value?.id === id) return
-  selectTask(id)
-  restTimer()
+  tasksStore.select(id)
+  timerStore.rest()
 }
 
 onMounted(() => {

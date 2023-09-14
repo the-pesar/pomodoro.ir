@@ -8,13 +8,11 @@
   </section>
 </template>
 <script lang="ts" setup>
-import { useTasks } from '~/composables/Tasks'
-import { useTimer } from '~/composables/Timer'
-import { useStatus } from '~/composables/Status'
+import { useTimerStore } from '@/stores/Timer'
+import { useTasksStore } from '@/stores/Tasks'
 
-const { selectedTask } = useTasks()
-const { time } = useTimer()
-const { status } = useStatus()
+const { selectedTask } = storeToRefs(useTasksStore())
+const { time, status } = storeToRefs(useTimerStore())
 
 const progressWidth = computed<string>(
   () => `${100 - (time.value / status.value.time) * 100}%`
