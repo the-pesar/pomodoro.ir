@@ -27,7 +27,7 @@ const randomBanner = computed(() => banners.value[3])
 
 <template>
   <a
-    class="sticky flex bottom-5 mx-5 invisible xl:visible"
+    class="sticky inline-block bottom-10 mt-36 mx-5 invisible xl:visible"
     target="_blank"
     :href="randomBanner.link">
     <div class="flex items-center bg-glass fade-in-animation p-3 rounded-lg">
