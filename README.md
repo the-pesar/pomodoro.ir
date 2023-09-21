@@ -13,6 +13,7 @@ Pomodoro.ir is a pomodoro technique timer progressive web app built with Nuxt an
 -  [ ] Settings and customization
 -  [ ] Stats and report
 -  [ ] Multi-language (EN & FA)
+-  [ ] Fixing PWA bugs
 
 ## Usage
 
