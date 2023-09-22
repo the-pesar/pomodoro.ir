@@ -4,7 +4,7 @@ Pomodoro.ir is a pomodoro technique timer progressive web app built with Nuxt an
 
 ## Features
 
-- Set 25 minute pomodoro timer
+- Set custom pomodoro timer
 - Automatic alerts with notification when timer ends 
 - Responsive design and PWA support
 
