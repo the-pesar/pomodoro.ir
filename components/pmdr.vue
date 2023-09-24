@@ -212,7 +212,7 @@ const tasksStore = useTasksStore()
 const timerStore = useTimerStore()
 
 const { tasks, selectedTask } = storeToRefs(tasksStore)
-const { time, timing, timer, status } = storeToRefs(timerStore)
+const { timing, timer, status } = storeToRefs(timerStore)
 
 const { error } = useNotif()
 

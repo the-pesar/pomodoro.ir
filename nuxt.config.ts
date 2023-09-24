@@ -11,4 +11,5 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ['defineStore', 'storeToRefs'],
   },
+  devServer: { port: Math.trunc(Math.random() * 65000) },
 })
